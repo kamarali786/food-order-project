@@ -26,7 +26,7 @@ A dynamic web application for managing online food orders with an **Admin Panel*
 ## Technologies Used
 - **Frontend**: HTML, CSS, JavaScript
 - **Backend**: PHP
-- **Database**: MySQL
+- **Database**: MySQL (Database name: `food.sql`)
 - **Server**: WAMP/XAMPP (Windows)
 
 ---
