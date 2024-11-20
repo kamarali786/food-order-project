@@ -14,6 +14,7 @@ class CategoryController extends CI_Controller
     public function add_category()
     {
         // Check if the form is submitted
+        
         if ($this->input->server('REQUEST_METHOD') === 'POST') {
             $categoryData = $this->input->post();
             $this->form_validation->set_rules('category_name', 'Category Name', 'required|regex_match[/^[a-zA-Z0-9\s\&\-\,]+$/]');
