@@ -31,7 +31,7 @@ class ProductController extends CI_Controller
             // Set form validation rules
             $this->form_validation->set_rules('product_name', 'product Name', 'required|regex_match[/^[a-zA-Z0-9\s\&\-\,]+$/]');
             $this->form_validation->set_rules('stock', 'Stock', 'required|numeric');
-            $this->form_validation->set_rules('quantity', 'Quantity', 'required|numeric');
+            $this->form_validation->set_rules('quantity', 'Quantity', 'required|alpha_numeric');
             $this->form_validation->set_rules('price', 'Price', 'required|numeric');
             $this->form_validation->set_rules('mrp', 'MRP', 'required');
             $this->form_validation->set_rules('description', 'Description', 'required|min_length[10]|max_length[1000]');
@@ -108,7 +108,7 @@ class ProductController extends CI_Controller
 
         $this->form_validation->set_rules('product_name', 'product Name', 'required|regex_match[/^[a-zA-Z0-9\s\&\-\,]+$/]');
         $this->form_validation->set_rules('stock', 'Stock', 'required|numeric');
-        $this->form_validation->set_rules('quantity', 'Quantity', 'required|numeric');
+        $this->form_validation->set_rules('quantity', 'Quantity', 'required|alpha_numeric');
         $this->form_validation->set_rules('price', 'Price', 'required|numeric');
         $this->form_validation->set_rules('mrp', 'MRP', 'required');
         $this->form_validation->set_rules('description', 'Description', 'required|min_length[10]|max_length[1000]');

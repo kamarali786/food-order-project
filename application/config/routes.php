@@ -84,6 +84,8 @@ $route['product/delete-product/(:any)'] = 'ProductController/delete_product/$1';
 $route['product/get-product/(:any)'] = 'ProductController/get_product/$1';
 $route['product/edit-product/(:any)'] = 'ProductController/edit_product/$1';
 
+$route['setting'] = 'SettingController';
+$route['setting/add-setting'] = 'SettingController/add_Setting';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

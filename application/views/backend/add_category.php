@@ -30,7 +30,7 @@ $this->load->view('backend/includes/header.php');
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Category name</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="category_name" class="form-control" id="horizontal-firstname-input" value="<?php echo $editData->category_name?>">
-                                        <?php echo $this->session->flashdata('categoryName_error');?>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('categoryName_error');?></span>
                                     </div>
                                 </div>
 
@@ -42,7 +42,7 @@ $this->load->view('backend/includes/header.php');
                                         <input name="file" type="file" class="form-control mt-2" id="horizontal-firstname-input">
                                         <p class="text-primary mt-1 fw-bolder">Note: Size of the image should be less than 1 MB</p>
                                         <?php if ($this->session->flashdata('file_error')) { ?>
-                                            <p class="text-danger" style="color:red"><?php echo $this->session->flashdata('file_error'); ?></p>
+                                            <span class="text-danger"><?php echo $this->session->flashdata('file_error');?></span> 
                                         <?php } ?>
                                     </div>
                                 </div>
@@ -64,7 +64,7 @@ $this->load->view('backend/includes/header.php');
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Category name</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="category_name" class="form-control" id="horizontal-firstname-input" value="<?php echo $this->session->flashdata('categoryName')?>">
-                                       <?php echo $this->session->flashdata('categoryName_error');?>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('categoryName_error');?></span>
                                     </div>
                                 </div>
                                 <div class="row my-4">
@@ -73,7 +73,7 @@ $this->load->view('backend/includes/header.php');
                                         <input name="file" type="file" class="form-control" id="horizontal-firstname-input">
                                         <p class="text-primary mt-1 fw-bolder">Note: Size of the image should be less than 1 MB</p>
                                         <?php if ($this->session->flashdata('file_error')) { ?>
-                                            <p class="text-danger"><?php echo $this->session->flashdata('file_error') ?></p>
+                                            <span class="text-danger"><?php echo $this->session->flashdata('file_error');?></span> 
                                         <?php } ?>
                                     </div>
                                 </div>

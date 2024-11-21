@@ -37,7 +37,7 @@ $this->load->view('backend/includes/header.php');
                                                 <?php endforeach; ?>
                                             <?php endif; ?>
                                         </select>
-                                        <?php echo $this->session->flashdata('category_error'); ?>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('category_error'); ?></span>
                                     </div>
 
                                 </div>
@@ -45,14 +45,14 @@ $this->load->view('backend/includes/header.php');
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Sub Category name</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="subCategory_name" class="form-control" id="horizontal-firstname-input" value="<?php echo set_value('subCategory_name', $this->session->flashdata('subCategoryName') ?? $editData->subCategory_name);?>">
-                                        <?php echo $this->session->flashdata('subCategoryName_error'); ?>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('subCategoryName_error'); ?></span>
                                     </div>
                                 </div>
                                 <div class="row my-4">
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Description</label>
                                     <div class="col-sm-9">
                                         <textarea type="text" name="description" class="form-control" id="horizontal-firstname-input"><?php echo set_value('description', $this->session->flashdata('description_value') ?? $editData->description);?></textarea>
-                                        <?php echo $this->session->flashdata('description'); ?>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('description_error'); ?></span>
                                     </div>
                                 </div>
 
@@ -92,21 +92,21 @@ $this->load->view('backend/includes/header.php');
                                                 <?php endforeach; ?>
                                             <?php endif; ?>
                                         </select>
-                                        <?php echo $this->session->flashdata('category_error'); ?>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('category_error'); ?></span>
                                     </div>
                                 </div>
                                 <div class="row my-4">
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Sub Category name</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="subCategory_name" class="form-control" id="horizontal-firstname-input" value="<?php echo $this->session->flashdata('subCategory_name') ?>">
-                                        <?php echo $this->session->flashdata('subCategoryName_error'); ?>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('subCategoryName_error'); ?></span>
                                     </div>
                                 </div>
                                 <div class="row my-4">
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Description</label>
                                     <div class="col-sm-9">
                                         <textarea name="description" class="form-control" id="horizontal-firstname-input"><?php echo $this->session->flashdata('description') ?></textarea>
-                                        <?php echo $this->session->flashdata('description_error'); ?>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('description_error'); ?></span>
                                     </div>
                                     <div class="row my-4">
                                         <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Choose Sub Category Image</label>

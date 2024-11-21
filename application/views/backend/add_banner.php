@@ -30,7 +30,7 @@ $this->load->view('backend/includes/header.php');
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Banner Label</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="banner_label" class="form-control" id="horizontal-firstname-input" value="<?php echo set_value('banner_label', $this->session->flashdata('banner_label') ?? $editData->banner_label);?>">
-                                       <?php echo $this->session->flashdata('bannerLabel_error');?>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('bannerLabel_error');?></span>
                                     </div>
                                 </div>
                                 <div class="row my-4">
@@ -41,7 +41,7 @@ $this->load->view('backend/includes/header.php');
                                         <input name="file" type="file" class="form-control mt-2" id="horizontal-firstname-input">
                                         <p class="text-primary mt-1 fw-bolder">Note: Size of the image should be less than 1 MB</p>
                                         <?php if ($this->session->flashdata('file_error')) { ?>
-                                            <p class="text-danger" style="color:red"><?php echo $this->session->flashdata('file_error');?></p>
+                                            <span class="text-danger"><?php echo $this->session->flashdata('file_error');?></span> 
                                         <?php } ?>
                                     </div>
                                 </div>
@@ -63,7 +63,7 @@ $this->load->view('backend/includes/header.php');
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Banner Label</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="banner_label" class="form-control" id="horizontal-firstname-input" value="<?php echo $this->session->flashdata('bannerLabel')?>">
-                                       <?php echo $this->session->flashdata('bannerLabel_error');?>
+                                       <span class="text-danger"><?php echo $this->session->flashdata('bannerLabel_error');?></span>
                                     </div>
                                 </div>
                                 <div class="row my-4">
@@ -72,7 +72,7 @@ $this->load->view('backend/includes/header.php');
                                         <input name="file" type="file" class="form-control" id="horizontal-firstname-input">
                                         <p class="text-primary mt-1 fw-bolder">Note: Size of the image should be less than 1 MB</p>
                                         <?php if ($this->session->flashdata('file_error')) { ?>
-                                            <p class="text-danger"><?php echo $this->session->flashdata('file_error') ?></p>
+                                            <span class="text-danger"><?php echo $this->session->flashdata('file_error');?></span> 
                                         <?php } ?>
                                     </div>
                                 </div>

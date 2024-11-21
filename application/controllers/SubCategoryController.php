@@ -119,7 +119,7 @@ class subCategoryController extends CI_Controller
             $this->session->set_flashdata('subCategoryName', $this->input->post('subCategory_name'));
             $this->session->set_flashdata('description_value', $this->input->post('description'));
              $this->session->set_flashdata('subCategoryName_error', form_error('subCategory_name'));
-            $this->session->set_flashdata('description', form_error('description'));
+            $this->session->set_flashdata('description_error', form_error('description'));
             redirect('subCategory/get-subCategory/' . $id);
         } else {
             $config['upload_path']   = './uploads/subCategory/';

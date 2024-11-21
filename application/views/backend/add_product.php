@@ -37,7 +37,7 @@ $this->load->view('backend/includes/header.php');
                                                 <?php endforeach; ?>
                                             <?php endif; ?>
                                         </select>
-                                        <?php echo $this->session->flashdata('subCategory_error'); ?>
+                                       <span class="text-danger"><?php echo $this->session->flashdata('subCategory_error'); ?></span>
                                     </div>
 
                                 </div>
@@ -45,42 +45,42 @@ $this->load->view('backend/includes/header.php');
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Product name</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="product_name" class="form-control" id="horizontal-firstname-input" value="<?php echo set_value('product_name', $this->session->flashdata('product_name') ?? $editData->product_name);?>">
-                                        <?php echo $this->session->flashdata('productName_error'); ?>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('productName_error'); ?></span>
                                     </div>
                                 </div>
                                 <div class="row my-4">
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Description</label>
                                     <div class="col-sm-9">
                                         <textarea type="text" name="description" class="form-control" id="horizontal-firstname-input"><?php echo set_value('description', $this->session->flashdata('description') ?? $editData->description);?></textarea>
-                                        <?php echo $this->session->flashdata('description_error'); ?>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('description_error'); ?></span>
                                     </div>
                                 </div>
                                 <div class="row my-4">
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Product stock</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="stock" class="form-control" id="horizontal-firstname-input" value="<?php echo set_value('product_name', $this->session->flashdata('stock') ?? $editData->stock);?>">
-                                        <?php echo $this->session->flashdata('stock_error'); ?>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('stock_error'); ?></span>
                                     </div>
                                 </div>
                                 <div class="row my-4">
-                                    <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Product Quantity</label>
+                                    <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Product Quantity (Kg,mg)</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="quantity" class="form-control" id="horizontal-firstname-input" value="<?php echo set_value('product_name', $this->session->flashdata('quantity') ?? $editData->quantity);?>">
-                                        <?php echo $this->session->flashdata('quantity_error'); ?>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('quantity_error'); ?></span>
                                     </div>
                                 </div>
                                 <div class="row my-4">
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Product Price</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="price" class="form-control" id="horizontal-firstname-input" value="<?php echo set_value('product_name', $this->session->flashdata('price') ?? $editData->price);?>">
-                                        <?php echo $this->session->flashdata('price_error'); ?>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('price_error'); ?></span>
                                     </div>
                                 </div>
                                 <div class="row my-4">
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Product MRP</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="mrp" class="form-control" id="horizontal-firstname-input" value="<?php echo set_value('product_name', $this->session->flashdata('mrp') ?? $editData->mrp);?>">
-                                        <?php echo $this->session->flashdata('mrp_error'); ?>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('mrp_error'); ?></span>
                                     </div>
                                 </div>
 
@@ -92,7 +92,7 @@ $this->load->view('backend/includes/header.php');
                                         <input name="file" type="file" class="form-control mt-2" id="horizontal-firstname-input">
                                         <p class="text-primary mt-1 fw-bolder">Note: Size of the image should be less than 1 MB</p>
                                         <?php if ($this->session->flashdata('file_error')) { ?>
-                                            <p class="text-danger" style="color:red"><?php echo $this->session->flashdata('file_error'); ?></p>
+                                            <span class="text-danger"><?php echo $this->session->flashdata('file_error'); ?></span>
                                         <?php } ?>
                                     </div>
                                 </div>
@@ -120,49 +120,49 @@ $this->load->view('backend/includes/header.php');
                                                 <?php endforeach; ?>
                                             <?php endif; ?>
                                         </select>
-                                        <?php echo $this->session->flashdata('product_error'); ?>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('subCategory_error'); ?></span>
                                     </div>
                                 </div>
                                 <div class="row my-4">
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Product name</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="product_name" class="form-control" id="horizontal-firstname-input" value="<?php echo $this->session->flashdata('product_name') ?>">
-                                        <?php echo $this->session->flashdata('productName_error'); ?>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('productName_error'); ?></span>
                                     </div>
                                 </div>
                                 <div class="row my-4">
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Description</label>
                                     <div class="col-sm-9">
                                         <textarea type="text" name="description" class="form-control" id="horizontal-firstname-input"><?php echo $this->session->flashdata('description') ?></textarea>
-                                        <?php echo $this->session->flashdata('description_error'); ?>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('description_error'); ?></span>
                                     </div>
                                 </div>
                                 <div class="row my-4">
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Product stock</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="stock" class="form-control" id="horizontal-firstname-input" value="<?php echo $this->session->flashdata('stock') ?>">
-                                        <?php echo $this->session->flashdata('stock_error'); ?>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('stock_error'); ?></span>
                                     </div>
                                 </div>
                                 <div class="row my-4">
-                                    <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Product Quantity</label>
+                                    <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Product Quantity (Kg,mg)</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="quantity" class="form-control" id="horizontal-firstname-input" value="<?php echo $this->session->flashdata('quantity') ?>">
-                                        <?php echo $this->session->flashdata('quantity_error'); ?>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('quantity_error'); ?></span>
                                     </div>
                                 </div>
                                 <div class="row my-4">
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Product Price</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="price" class="form-control" id="horizontal-firstname-input" value="<?php echo $this->session->flashdata('price') ?>">
-                                        <?php echo $this->session->flashdata('price_error'); ?>
+                                        <span class="text-danger"> <?php echo $this->session->flashdata('price_error'); ?></span>
                                     </div>
                                 </div>
                                 <div class="row my-4">
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Product MRP</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="mrp" class="form-control" id="horizontal-firstname-input" value="<?php echo $this->session->flashdata('mrp') ?>">
-                                        <?php echo $this->session->flashdata('mrp_error'); ?>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('mrp_error'); ?></span>
                                     </div>
                                 </div>
 
@@ -172,7 +172,7 @@ $this->load->view('backend/includes/header.php');
                                         <input name="file" type="file" class="form-control" id="horizontal-firstname-input">
                                         <p class="text-primary mt-1 fw-bolder">Note: Size of the image should be less than 1 MB</p>
                                         <?php if ($this->session->flashdata('file_error')) { ?>
-                                            <p class="text-danger"><?php echo $this->session->flashdata('file_error') ?></p>
+                                            <span class="text-danger"><?php echo $this->session->flashdata('file_error') ?></span>
                                         <?php } ?>
                                     </div>
 

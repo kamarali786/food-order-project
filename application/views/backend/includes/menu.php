@@ -40,6 +40,12 @@
                         <span key="t-dashboards">Product</span>
                     </a>
                 </li>
+                <li class="<?php echo !empty(str_contains($_SERVER['PHP_SELF'], "setting")) ? 'mm-active' : ""; ?>">
+                    <a href="<?php echo base_url('setting') ?>" class="waves-effect">
+                        <i class="fa fa-cog"></i></span>
+                        <span key="t-dashboards">Setting</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->

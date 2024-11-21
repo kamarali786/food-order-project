@@ -58,7 +58,7 @@ $this->load->view('backend/includes/header.php');
                                                     <td><img src="<?php echo base_url($product->product_image); ?>" alt="Product Image" width="100"></td>
                                                     <td><?php echo $product->description?></td>
                                                     <td><?php echo $product->stock ?></td>
-                                                    <td><?php echo $product->quantity?> Kg</td>
+                                                    <td><?php echo $product->quantity?></td>
                                                     <td>₹<?php echo $product->price?></td>
                                                     <td>₹<?php echo $product->mrp?></td>
                                                     <td class="fw-bold text-primary"><?php echo ($product->status == 1) ? 'Active' : 'Inactive'; ?></td>
