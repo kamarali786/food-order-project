@@ -63,7 +63,7 @@ class ProductController extends CI_Controller
                 $this->session->set_flashdata('stock', $this->input->post('stock'));
                 $this->session->set_flashdata('quantity', $this->input->post('quantity'));
                 $this->session->set_flashdata('price', $this->input->post('price'));
-                $this->session->set_flashdata('mrp', $this->input->post('mrp'));
+                $this->session->set_flashdata('mrp', $this->input->post('mrp'));    
                 redirect(base_url('product/add-product'));
             } else {
                 // File upload successful
