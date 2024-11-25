@@ -5,7 +5,9 @@ $this->load->view('backend/includes/header.php');
 <div class="main-content">
     <div class="page-content">
         <div class="container-fluid">
-            <form action="<?php echo base_url('setting/add-setting'); ?>" method="POST" enctype="multipart/form-data">
+            <form action="<?php echo base_url('setting/add-setting') ?>" method="POST" enctype="multipart/form-data">
+
+
 
                 <div class="col-xl-9">
                     <div class="card">
@@ -30,7 +32,7 @@ $this->load->view('backend/includes/header.php');
                                         <input type="text" class="form-control" id="form-email-input" name="site_name"
                                             placeholder="Enter Name" value="<?php echo set_value(
                                                                                 'site_name',
-                                                                                $this->session->flashdata('site_name') ? $this->session->flashdata('site_name_data') : (!empty($setting[0]->value) ? $setting[0]->value : '')
+                                                                                $this->session->flashdata('site_name') ? $this->session->flashdata('site_name_data') : (!empty($setting['site_name']) ? $setting['site_name'] : '')
                                                                             ); ?>">
                                         <label for="form row-email-input" class="text-danger mt-1">
                                             <?php echo $this->session->flashdata('site_name'); ?>
@@ -43,7 +45,7 @@ $this->load->view('backend/includes/header.php');
                                         <input type="email" class="form-control" id="form-email-input" name="email"
                                             placeholder="Enter name" value="<?php echo set_value(
                                                                                 'site_name',
-                                                                                $this->session->flashdata('email_data') ? $this->session->flashdata('email_data') : (!empty($setting[1]->value) ? $setting[1]->value : '')
+                                                                                $this->session->flashdata('email_data') ? $this->session->flashdata('email_data') : (!empty($setting['email']) ? $setting['email'] : '')
                                                                             ); ?>"> <label for="form row-email-input" class="text-danger mt-1">
                                             <?php echo $this->session->flashdata('email'); ?>
                                         </label>
@@ -57,7 +59,7 @@ $this->load->view('backend/includes/header.php');
                                             id="form row-password-input" name="phone_number" placeholder="Phone number"
                                             value="<?php echo set_value(
                                                         'phone_number',
-                                                        $this->session->flashdata('phone_number_data') ? $this->session->flashdata('phone_number_data') : (!empty($setting[2]->value) ? $setting[2]->value : '')
+                                                        $this->session->flashdata('phone_number_data') ? $this->session->flashdata('phone_number_data') : (!empty($setting['phone_number']) ? $setting['phone_number'] : '')
                                                     ); ?>"> <label for="form row-email-input" class="text-danger mt-1">
                                             <?php echo $this->session->flashdata('phone_number'); ?>
                                         </label>
@@ -70,7 +72,7 @@ $this->load->view('backend/includes/header.php');
                                             name="about" placeholder="about your site"
                                             value="<?php echo set_value(
                                                         'about',
-                                                        $this->session->flashdata('about_data') ? $this->session->flashdata('about_data') : (!empty($setting[3]->value) ? $setting[3]->value : '')
+                                                        $this->session->flashdata('about_data') ? $this->session->flashdata('about_data') : (!empty($setting['about']) ? $setting['about'] : '')
                                                     ); ?>"> <label for="form row-email-input" class="text-danger mt-1">
                                             <?php echo $this->session->flashdata('about'); ?>
                                         </label>
@@ -83,7 +85,7 @@ $this->load->view('backend/includes/header.php');
                                             name="address" placeholder="Enter Address"
                                             value="<?php echo set_value(
                                                         'address',
-                                                        $this->session->flashdata('address_data') ? $this->session->flashdata('address_data') : (!empty($setting[4]->value) ? $setting[4]->value : '')
+                                                        $this->session->flashdata('address_data') ? $this->session->flashdata('address_data') : (!empty($setting['address']) ? $setting['address'] : '')
                                                     ); ?>"> <label for="form row-email-input" class="text-danger mt-1">
                                             <?php echo $this->session->flashdata('address'); ?>
                                         </label>
@@ -94,6 +96,9 @@ $this->load->view('backend/includes/header.php');
                                 <div class="col-lg-4">
                                     <div class="mb-3">
                                         <label for="form row-input city" class="form-label">Choose Logo</label>
+                                        <div class="my-4">
+                                            <img src="<?php echo !empty($setting['logo']) ? base_url($setting["logo"]) : "" ?>" class="rounded img-thumbnail border-warning" height="100" width="100" alt="logo"></span>
+                                        </div>
                                         <input type="file" class="form-control" id="form row-input city" name="logo">
                                     </div>
                                     <label for="form row-email-input" class="text-danger mt-1">
@@ -104,6 +109,9 @@ $this->load->view('backend/includes/header.php');
                                     <div class="mb-3">
                                         <div class="mb-3">
                                             <label for="form row-input city" class="form-label">Choose Fav icon</label>
+                                            <div class="my-4">
+                                                <img src="<?php echo !empty($setting["fav_icon"]) ? base_url($setting["fav_icon"]) : "" ?>" class="rounded img-thumbnail border-warning"   height="100" width="100" alt="logo">
+                                            </div>
                                             <input type="file" class="form-control" id="form row-input city"
                                                 name="fav_icon">
                                         </div>
@@ -129,7 +137,7 @@ $this->load->view('backend/includes/header.php');
                                         placeholder="Facebook.com" name="fb_url"
                                         value="<?php echo set_value(
                                                     'fb_url',
-                                                    $this->session->flashdata('fb_url_data') ? $this->session->flashdata('fb_url_data') : (!empty($setting[5]->value) ? $setting[5]->value : '')
+                                                    $this->session->flashdata('fb_url_data') ? $this->session->flashdata('fb_url_data') : (!empty($setting['fb_url']) ? $setting['fb_url'] : '')
                                                 ); ?>"> <label for="form row-email-input" class="text-danger mt-1">
                                         <?php echo $this->session->flashdata('fb_url'); ?>
                                     </label>
@@ -142,7 +150,7 @@ $this->load->view('backend/includes/header.php');
                                         placeholder="twitter.com" name="x_url"
                                         value="<?php echo set_value(
                                                     'x_url',
-                                                    $this->session->flashdata('x_url_data') ? $this->session->flashdata('x_url_data') : (!empty($setting[6]->value) ? $setting[6]->value : '')
+                                                    $this->session->flashdata('x_url_data') ? $this->session->flashdata('x_url_data') : (!empty($setting['x_url']) ? $setting['x_url'] : '')
                                                 ); ?>"> <label for="form row-email-input" class="text-danger mt-1">
                                         <?php echo $this->session->flashdata('x_url'); ?>
                                     </label>
@@ -156,7 +164,7 @@ $this->load->view('backend/includes/header.php');
                                         placeholder="instagram.com" name="insta_url"
                                         value="<?php echo set_value(
                                                     'insta_url',
-                                                    $this->session->flashdata('insta_url_data') ? $this->session->flashdata('insta_url_data') : (!empty($setting[7]->value) ? $setting[7]->value : '')
+                                                    $this->session->flashdata('insta_url_data') ? $this->session->flashdata('insta_url_data') : (!empty($setting['insta_url']) ? $setting['insta_url'] : '')
                                                 ); ?>"> <label for="form row-email-input" class="text-danger mt-1">
                                         <?php echo $this->session->flashdata('insta_url'); ?>
                                     </label>
@@ -170,7 +178,7 @@ $this->load->view('backend/includes/header.php');
                                         placeholder="youtube.com" name="yt_url"
                                         value="<?php echo set_value(
                                                     'yt_url',
-                                                    $this->session->flashdata('yt_url_data') ? $this->session->flashdata('yt_url_data') : (!empty($setting[8]->value) ? $setting[8]->value : '')
+                                                    $this->session->flashdata('yt_url_data') ? $this->session->flashdata('yt_url_data') : (!empty($setting['yt_url']) ? $setting['yt_url'] : '')
                                                 ); ?>"> <label for="form row-email-input" class="text-danger mt-1">
                                         <?php echo $this->session->flashdata('yt_url'); ?>
                                     </label>

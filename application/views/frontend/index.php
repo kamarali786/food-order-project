@@ -42,14 +42,15 @@ $this->load->view('frontend/includes/header');
             <span class="visually-hidden">Previous</span>
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
 </div>
 <!-- Carousel End -->
 
+<?php print_r($setting['logo']);?>
 
 <!-- About Start -->
 <div class="container-xxl py-5">

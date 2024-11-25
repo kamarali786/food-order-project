@@ -9,21 +9,21 @@
     <div class="container-fluid fixed-top px-0 wow fadeIn" data-wow-delay="0.1s">
         <div class="top-bar row gx-0 align-items-center d-none d-lg-flex">
             <div class="col-lg-6 px-5 text-start">
-                <small><i class="fa fa-map-marker-alt me-2"></i>123 Street, New York, USA</small>
-                <small class="ms-4"><i class="fa fa-envelope me-2"></i>info@example.com</small>
+                <small><i class="fa fa-map-marker-alt me-2"></i><?php echo !empty($setting['address'])?$setting['address']:""?></small>
+                <small class="ms-4"><i class="fa fa-envelope me-2"></i><?php echo !empty($setting['email'])?$setting['email']:""?></small>
             </div>
             <div class="col-lg-6 px-5 text-end">
                 <small>Follow us:</small>
-                <a class="text-body ms-3" href=""><i class="fab fa-facebook-f"></i></a>
-                <a class="text-body ms-3" href=""><i class="fab fa-twitter"></i></a>
-                <a class="text-body ms-3" href=""><i class="fab fa-linkedin-in"></i></a>
-                <a class="text-body ms-3" href=""><i class="fab fa-instagram"></i></a>
+                <a class="text-body ms-3" href="<?php echo $setting['fb_url'];?>"><i class="fab fa-facebook-f"></i></a>
+                <a class="text-body ms-3" href="<?php echo $setting['x_url'];?>"><i class="fab fa-twitter"></i></a>
+                <a class="text-body ms-3" href="<?php echo $setting['insta_url'];?>"><i class="fab fa-instagram"></i></a>
+                <a class="text-body ms-3" href="<?php echo $setting['yt_url'];?>"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
 
         <nav class="navbar navbar-expand-lg navbar-light py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
             <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
-                <h1 class="fw-bold text-primary m-0">F<span class="text-secondary">oo</span>dy</h1>
+            <img src="<?php echo !empty($setting['logo'])?base_url($setting['logo']):""?>" height="150" width="200" alt="site_logo">
             </a>
             <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>

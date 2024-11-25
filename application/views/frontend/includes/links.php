@@ -3,13 +3,13 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Foody - Organic Food Website Template</title>
+    <title><?php echo !empty($setting['site_name'])?$setting['site_name']:""?></title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
     <base href="<?php echo base_url(); ?>">
     <!-- Favicon -->
-    <link href=<?php echo base_url("assets/frontend/img/favicon.png");?> rel="icon">
+    <link href=<?php echo !empty($setting['fav_icon']) ? base_url($setting['fav_icon']) : "";?> rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
