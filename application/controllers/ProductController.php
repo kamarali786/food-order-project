@@ -11,6 +11,7 @@ class ProductController extends CI_Controller
         }
         $this->load->model('ProductModel');
         $this->load->model('SubCategoryModel');
+        $this->load->model('CategoryModel');
     }
 
     public function product()
@@ -20,7 +21,8 @@ class ProductController extends CI_Controller
     }
     public function add_product()
     {
-        $data['subCategoryData'] = $this->SubCategoryModel->subCategory();
+        //$data['subCategoryData'] = $this->SubCategoryModel->subCategory();
+        $data['CategoryData'] = $this->CategoryModel->Category();
         $this->load->view('backend/add_product', $data);
 
         //Check if the form is submitted
@@ -95,9 +97,9 @@ class ProductController extends CI_Controller
     public function get_product($id)
 
     {
-        $data['subCategoryData'] = $this->SubCategoryModel->subCategory();
+        $data['CategoryData'] = $this->CategoryModel->Category();                                                   
         $data['editData'] = $this->ProductModel->get_product($id);
-        if ($data['subCategoryData'] && $data['editData']) {
+        if ($data['CategoryData'] && $data['editData']) {
             $this->load->view('backend/add_product', $data);
         }
     }

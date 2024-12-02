@@ -27,59 +27,66 @@ $this->load->view('backend/includes/header.php');
                                 <div class="row my-4">
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Choose Category</label>
                                     <div class="col-sm-9">
-                                        <select class="form-select" name="subCategory_id">
-                                            <?php if ($subCategoryData): ?>
-                                                <?php foreach ($subCategoryData as $subCategory): ?>
-                                                    <option value="<?php echo $subCategory->subCategory_id; ?>"
-                                                        <?php echo ($subCategory->subCategory_id == $editData->subCategory_id) ? 'selected' : ''; ?>>
-                                                        <?php echo $subCategory->subCategory_name; ?>
+                                        <select class="form-select" name="Category_id" id="categorySelect">
+                                            <?php if ($CategoryData):
+                                                foreach ($CategoryData as $Category): ?>
+                                                    <option value="<?php echo $Category->category_id?>"><?php echo $Category->category_name ?>
+
                                                     </option>
                                                 <?php endforeach; ?>
                                             <?php endif; ?>
                                         </select>
-                                       <span class="text-danger"><?php echo $this->session->flashdata('subCategory_error'); ?></span>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('subCategory_error'); ?></span>
                                     </div>
+                                </div>
+                                <div class="row my-4">
+                                    <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Choose subCategory</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-select subcate" name="subCategory_id">
 
+                                        </select>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('subCategory_error'); ?></span>
+                                    </div>
                                 </div>
                                 <div class="row my-4">
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Product name</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="product_name" class="form-control" id="horizontal-firstname-input" value="<?php echo set_value('product_name', $this->session->flashdata('product_name') ?? $editData->product_name);?>">
+                                        <input type="text" name="product_name" class="form-control" id="horizontal-firstname-input" value="<?php echo set_value('product_name', $this->session->flashdata('product_name') ?? $editData->product_name); ?>">
                                         <span class="text-danger"><?php echo $this->session->flashdata('productName_error'); ?></span>
                                     </div>
                                 </div>
                                 <div class="row my-4">
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Description</label>
                                     <div class="col-sm-9">
-                                        <textarea type="text" name="description" class="form-control" id="horizontal-firstname-input"><?php echo set_value('description', $this->session->flashdata('description') ?? $editData->description);?></textarea>
+                                        <textarea type="text" name="description" class="form-control" id="horizontal-firstname-input"><?php echo set_value('description', $this->session->flashdata('description') ?? $editData->description); ?></textarea>
                                         <span class="text-danger"><?php echo $this->session->flashdata('description_error'); ?></span>
                                     </div>
                                 </div>
                                 <div class="row my-4">
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Product stock</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="stock" class="form-control" id="horizontal-firstname-input" value="<?php echo set_value('product_name', $this->session->flashdata('stock') ?? $editData->stock);?>">
+                                        <input type="text" name="stock" class="form-control" id="horizontal-firstname-input" value="<?php echo set_value('product_name', $this->session->flashdata('stock') ?? $editData->stock); ?>">
                                         <span class="text-danger"><?php echo $this->session->flashdata('stock_error'); ?></span>
                                     </div>
                                 </div>
                                 <div class="row my-4">
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Product Quantity (Kg,mg)</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="quantity" class="form-control" id="horizontal-firstname-input" value="<?php echo set_value('product_name', $this->session->flashdata('quantity') ?? $editData->quantity);?>">
+                                        <input type="text" name="quantity" class="form-control" id="horizontal-firstname-input" value="<?php echo set_value('product_name', $this->session->flashdata('quantity') ?? $editData->quantity); ?>">
                                         <span class="text-danger"><?php echo $this->session->flashdata('quantity_error'); ?></span>
                                     </div>
                                 </div>
                                 <div class="row my-4">
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Product Price</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="price" class="form-control" id="horizontal-firstname-input" value="<?php echo set_value('product_name', $this->session->flashdata('price') ?? $editData->price);?>">
+                                        <input type="text" name="price" class="form-control" id="horizontal-firstname-input" value="<?php echo set_value('product_name', $this->session->flashdata('price') ?? $editData->price); ?>">
                                         <span class="text-danger"><?php echo $this->session->flashdata('price_error'); ?></span>
                                     </div>
                                 </div>
                                 <div class="row my-4">
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Product MRP</label>
                                     <div class="col-sm-9">
-                                        <input type="text" name="mrp" class="form-control" id="horizontal-firstname-input" value="<?php echo set_value('product_name', $this->session->flashdata('mrp') ?? $editData->mrp);?>">
+                                        <input type="text" name="mrp" class="form-control" id="horizontal-firstname-input" value="<?php echo set_value('product_name', $this->session->flashdata('mrp') ?? $editData->mrp); ?>">
                                         <span class="text-danger"><?php echo $this->session->flashdata('mrp_error'); ?></span>
                                     </div>
                                 </div>
@@ -88,7 +95,7 @@ $this->load->view('backend/includes/header.php');
                                     <label for="horizontal-firstname-input" class="  col-sm-3 col-form-label">Current Product Image</label>
                                     <div class="col-sm-6">
                                         <!-- Show existing subCategory image if editing -->
-                                        <img  src="<?php echo base_url($editData->product_image); ?>" alt="Current subCategory" width="100" class="mb-4 img-fluid subCategory-img">
+                                        <img src="<?php echo base_url($editData->product_image); ?>" alt="Current subCategory" width="100" class="mb-4 img-fluid subCategory-img">
                                         <input name="file" type="file" class="form-control mt-2" id="horizontal-firstname-input">
                                         <p class="text-primary mt-1 fw-bolder">Note: Size of the image should be less than 1 MB</p>
                                         <?php if ($this->session->flashdata('file_error')) { ?>
@@ -111,14 +118,23 @@ $this->load->view('backend/includes/header.php');
                             <?php else: ?>
                                 <!-- For Adding New product -->
                                 <div class="row my-4">
-                                    <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Choose subCategory</label>
+                                    <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Choose Category</label>
                                     <div class="col-sm-9">
-                                        <select class="form-select" name="subCategory_id">
-                                            <?php if ($subCategoryData):
-                                                foreach ($subCategoryData as $subCategory): ?>
-                                                    <option value="<?php echo $subCategory->subCategory_id ?>"><?php echo $subCategory->subCategory_name ?></option>
+                                        <select class="form-select" name="subCategory_id" id="categorySelect">
+                                            <?php if ($CategoryData):
+                                                foreach ($CategoryData as $Category): ?>
+                                                    <option value="<?php echo $Category->category_id ?>"><?php echo $Category->category_name ?></option>
                                                 <?php endforeach; ?>
                                             <?php endif; ?>
+                                        </select>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('subCategory_error'); ?></span>
+                                    </div>
+                                </div>
+                                <div class="row my-4">
+                                    <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Choose subCategory</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-select subcate" name="subCategory_id">
+
                                         </select>
                                         <span class="text-danger"><?php echo $this->session->flashdata('subCategory_error'); ?></span>
                                     </div>
@@ -175,7 +191,6 @@ $this->load->view('backend/includes/header.php');
                                             <span class="text-danger"><?php echo $this->session->flashdata('file_error') ?></span>
                                         <?php } ?>
                                     </div>
-
                                     <div class="row justify-content-end">
                                         <div class="col-sm-9">
                                             <div class="form-check mb-4">

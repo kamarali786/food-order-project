@@ -19,3 +19,25 @@ function deleted(link) {
 	});
 	return false;
 }
+
+$(document).ready(function () {
+	$("#categorySelect").change(function () {
+		var cate_id = $(this).val();
+		if (cate_id) {
+			$.ajax({
+				url: "sub-category-id",
+				method: "POST",
+				data: { cate_id: cate_id },
+				success: function (data) {
+					$(".subcate").html(data);
+					console.log(data);
+				},
+				error: function () {
+					alert("Error fetching subcategories.");
+				},
+			});
+		} else {
+			$(".subcate").html("");
+		}
+	});
+});

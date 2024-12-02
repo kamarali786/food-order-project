@@ -1,3 +1,17 @@
+<?php
+  $query = $this->db->order_by('id')->get('settings');
+
+  $data = [];
+
+  if ($query) {
+
+      $result =  $query->result();
+
+      foreach ($result as $row) {
+          $data[$row->key] =  $row->value;
+      }
+  }
+?>
 <!doctype html>
 <html lang="en">
 
@@ -10,7 +24,7 @@
     <base href="<?php echo base_url(); ?>">
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="<?php echo base_url('assets/backend/images/f.png'); ?>">
+    <link rel="shortcut icon" href="<?php echo !empty($data['fav_icon'])?base_url($data['fav_icon']):""?>">
 
     <!-- Bootstrap Css -->
     <link href="<?php echo base_url("assets/backend/css/bootstrap.min.css"); ?>" id="bootstrap-style" rel="stylesheet" type="text/css" />

@@ -1,3 +1,17 @@
+<?php
+  $query = $this->db->order_by('id')->get('settings');
+
+  $setting = [];
+
+  if ($query) {
+
+      $result =  $query->result();
+
+      foreach ($result as $row) {
+          $setting[$row->key] =  $row->value;
+      }
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 

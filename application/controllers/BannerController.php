@@ -16,7 +16,7 @@ class BannerController extends CI_Controller
         $this->load->view('backend/add_banner.php');
         if ($this->input->server('REQUEST_METHOD') === 'POST') {
             $bannerData = $this->input->post();
-            $this->form_validation->set_rules('banner_label', 'Banner Label', 'required|max_length[50]|regex_match[/^[a-zA-Z0-9\s\&\-\?\"\,]+$/]');
+            $this->form_validation->set_rules('banner_label', 'Banner Label', 'required|max_length[50]|regex_match[/^[a-zA-Z0-9\s\&\-\?\'\:\",]+$/]');
             $config['upload_path']   = './uploads/banner/';
             $config['allowed_types'] = 'jpg|png|jpeg';
             $config['max_size']      = 1024;
@@ -75,7 +75,7 @@ class BannerController extends CI_Controller
         $data['banner'] = $this->BannerModel->get_banner($id);
 
         $this->load->view('backend/add_banner.php');
-        $this->form_validation->set_rules('banner_label', 'Banner Label', 'required|min_length[10]|max_length[50]|regex_match[/^[a-zA-Z0-9\s\&\-\?\"\,]+$/]');
+        $this->form_validation->set_rules('banner_label', 'Banner Label', 'required|min_length[10]|max_length[50]|regex_match[/^[a-zA-Z0-9\s\&\-\?\'\:\",]+$/]');
         $config['upload_path']   = './uploads/banner/';
         $config['allowed_types'] = 'jpg|png|jpeg';
         $config['max_size']      = 1024;

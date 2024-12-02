@@ -77,6 +77,7 @@ $route['subCategory/add-subCategory'] = 'subCategoryController/add_subCategory';
 $route['subCategory/delete-subCategory/(:any)'] = 'SubCategoryController/delete_subCategory/$1';
 $route['subCategory/get-subCategory/(:any)'] = 'SubCategoryController/get_subCategory/$1';
 $route['subCategory/edit-subCategory/(:any)'] = 'subCategoryController/edit_subCategory/$1';
+$route['sub-category-id'] = 'subCategoryController/subcategory_data';
 
 $route['product'] = 'ProductController/product';
 $route['product/add-product'] = 'ProductController/add_product';
