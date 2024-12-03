@@ -31,7 +31,7 @@ class SiteController extends CI_Controller
 			->get('products')
 			->result_array();
 
-			$grouped_data = [];
+		$grouped_data = [];
 		foreach ($products_by_category as $product) {
 			$grouped_data[$product['category_id']][] = $product;
 		}
@@ -51,6 +51,13 @@ class SiteController extends CI_Controller
 	}
 	public function products()
 	{
-		$this->load->view('frontend/products.php');
+		$products = $this->db
+			->select('*')
+			->where(['is_delete' => 0, 'status' => 1])
+			->order_by('product_id', 'DECS')
+			->get('products')
+			->result();
+			
+		$this->load->view('frontend/products.php',array('products' => $products));
 	}
 }
