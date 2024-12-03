@@ -9,7 +9,7 @@ class ProductModel extends CI_Model
         $this->db->select('products.* ,categories.category_name,subcategories.subCategory_name');
         $this->db->from('products');
         $this->db->join('subcategories', 'products.subCategory_id = subcategories.subCategory_id ', 'left');
-        $this->db->join('categories', 'subcategories.category_id = categories.category_id ', 'left');
+        $this->db->join('categories', 'products.category_id = categories.category_id ', 'left');
         $this->db->order_by('products.product_id', 'DESC');
         $this->db->where('products.is_delete', 0);
 
@@ -68,6 +68,7 @@ class ProductModel extends CI_Model
             $postdata['status'] = 0;
         }
         $postdata['updated_at'] = date('Y-m-d h:i:s');
+
         $query =  $this->db->where('product_id', $id)->update('products', $postdata);
         if ($query) {
             return true;

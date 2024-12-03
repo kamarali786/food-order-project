@@ -47,6 +47,13 @@
         return false;
     });
 
+    $('.product-category-main').click(function() {
+        $('.tab-content .tab-pane.active .product-main').css({
+            'animation-name': 'fadeInUp',
+            'visibility': 'visible'
+        });
+    });
+
 
     // Testimonials carousel
     $(".testimonial-carousel").owlCarousel({

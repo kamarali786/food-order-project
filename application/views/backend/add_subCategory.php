@@ -121,8 +121,8 @@ $this->load->view('backend/includes/header.php');
                                     <div class="row justify-content-end">
                                         <div class="col-sm-9">
                                             <div class="form-check mb-4">
-                                                <input type="checkbox" class="form-check-input" id="horizontalLayout-check" name="status">
-                                                <label for="horizontalLayout-check" class="form-check-label" checked>Activate</label>
+                                                <input type="checkbox" class="form-check-input" id="horizontalLayout-check" name="status" checked>
+                                                <label for="horizontalLayout-check" class="form-check-label">Activate</label>
                                             </div>
                                             <div>
                                                 <button class="btn btn-primary mt-2" type="submit">Add Sub Category</button>

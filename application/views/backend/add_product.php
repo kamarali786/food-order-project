@@ -21,16 +21,17 @@ $this->load->view('backend/includes/header.php');
                 <div class="card">
                     <div class="card-body">
                         <!-- Dynamic form action for Add or Edit -->
-                        <form action="<?php echo base_url('product/' . (!empty($editData) ? 'edit-product/' . $editData->subCategory_id : 'add-product')) ?>" class="form-horizontal" enctype="multipart/form-data" method="post">
+                        <form action="<?php echo base_url('product/' . (!empty($editData) ? 'edit-product/' . $editData->product_id : 'add-product')) ?>" class="form-horizontal" enctype="multipart/form-data" method="post">
                             <!-- If editing, show existing data -->
                             <?php if (!empty($editData)): ?>
+
                                 <div class="row my-4">
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Choose Category</label>
                                     <div class="col-sm-9">
                                         <select class="form-select" name="Category_id" id="categorySelect">
                                             <?php if ($CategoryData):
                                                 foreach ($CategoryData as $Category): ?>
-                                                    <option value="<?php echo $Category->category_id?>"><?php echo $Category->category_name ?>
+                                                    <option value="<?php echo $Category->category_id ?>" <?php echo ($editData->category_id == $Category->category_id) ? "selected" : "" ?>><?php echo $Category->category_name ?>
 
                                                     </option>
                                                 <?php endforeach; ?>
@@ -120,14 +121,14 @@ $this->load->view('backend/includes/header.php');
                                 <div class="row my-4">
                                     <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Choose Category</label>
                                     <div class="col-sm-9">
-                                        <select class="form-select" name="subCategory_id" id="categorySelect">
+                                        <select class="form-select" name="Category_id" id="categorySelect">
                                             <?php if ($CategoryData):
                                                 foreach ($CategoryData as $Category): ?>
-                                                    <option value="<?php echo $Category->category_id ?>"><?php echo $Category->category_name ?></option>
+                                                    <option value="<?php echo $Category->category_id ?>"><?php echo $Category->category_name?></option>
                                                 <?php endforeach; ?>
                                             <?php endif; ?>
                                         </select>
-                                        <span class="text-danger"><?php echo $this->session->flashdata('subCategory_error'); ?></span>
+                                        <span class="text-danger"><?php echo $this->session->flashdata('Category_error'); ?></span>
                                     </div>
                                 </div>
                                 <div class="row my-4">

@@ -67,12 +67,18 @@
       <script src="<?php echo base_url("assets/backend/libs/metismenu/metisMenu.min.js") ?>"></script>
       <script src="<?php echo base_url("assets/backend/libs/simplebar/simplebar.min.js") ?>"></script>
       <script src="<?php echo base_url("assets/backend/libs/node-waves/waves.min.js") ?>"></script>
+      <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+      <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
+
 
       <!-- apexcharts -->
-      <!-- <script src="<?php //echo base_url("assets/backend/libs/apexcharts/apexcharts.min.js") ?>"></script> -->
+      <!-- <script src="<?php //echo base_url("assets/backend/libs/apexcharts/apexcharts.min.js") 
+                        ?>"></script> -->
 
       <!-- dashboard init -->
-      <!-- <script src="<?php //echo base_url("assets/backend/js/pages/dashboard.init.js") ?>"></script> -->
+      <!-- <script src="<?php //echo base_url("assets/backend/js/pages/dashboard.init.js") 
+                        ?>"></script> -->
+      <script src="<?php echo base_url("assets/backend/js/pages/datatables.init.js") ?>"></script>
 
       <!-- App js -->
       <script src="<?php echo base_url("assets/backend/js/app.js") ?>"></script>

@@ -11,7 +11,7 @@ class ProductController extends CI_Controller
         }
         $this->load->model('ProductModel');
         $this->load->model('SubCategoryModel');
-        $this->load->model('CategoryModel');
+        $this->load->model('CategoryModel');            
     }
 
     public function product()
@@ -21,7 +21,6 @@ class ProductController extends CI_Controller
     }
     public function add_product()
     {
-        //$data['subCategoryData'] = $this->SubCategoryModel->subCategory();
         $data['CategoryData'] = $this->CategoryModel->Category();
         $this->load->view('backend/add_product', $data);
 
@@ -29,7 +28,6 @@ class ProductController extends CI_Controller
         if ($this->input->server('REQUEST_METHOD') === 'POST') {
             // Collect form input
             $productData = $this->input->post();
-
             // Set form validation rules
             $this->form_validation->set_rules('product_name', 'product Name', 'required|regex_match[/^[a-zA-Z0-9\s\&\-\,]+$/]');
             $this->form_validation->set_rules('stock', 'Stock', 'required|numeric');
