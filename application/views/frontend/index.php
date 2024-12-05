@@ -116,9 +116,11 @@ $this->load->view('frontend/includes/header');
             <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
                 <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
                     <?php if (!empty($categories)): ?>
-                        <?php $isFirst = true; ?>
-                        <?php foreach ($categories as $category):?>
-                            <?php if (!empty($grouped_data[$category->category_id])): ?>
+                        <?php $isFirst = true;
+                        $i = 0; ?>
+                        <?php foreach ($categories as $category): ?>
+                            <?php if (!empty($grouped_data[$category->category_id])):
+                                $i++; ?>
                                 <li class="nav-item me-2">
                                     <a class="btn btn-outline-primary product-category-main border-2 <?php echo $isFirst ? 'active' : ''; ?>"
                                         data-bs-toggle="pill"
@@ -126,7 +128,10 @@ $this->load->view('frontend/includes/header');
                                         <?php echo $category->category_name ?>
                                     </a>
                                 </li>
-                                <?php $isFirst = false; ?>
+                                <?php $isFirst = false;
+                                if ($i == 4) {
+                                    break;
+                                } ?>
                             <?php endif; ?>
                         <?php endforeach; ?>
                     <?php endif; ?>
@@ -145,9 +150,11 @@ $this->load->view('frontend/includes/header');
                                     <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp product-main" data-wow-delay="0.1s">
                                         <div class="product-item">
                                             <div class="position-relative bg-light overflow-hidden">
-                                                <img class="img-fluid w-100" style="height: 250px; width: 130px;"
-                                                    src="<?php echo base_url($product['product_image']); ?>"
-                                                    alt="<?php echo $product['product_name']; ?>">
+                                                <a class="text-body" href="<?php echo base_url('products/detail/' . $product['product_id']) ?>">
+                                                    <img class="img-fluid w-100" style="height: 250px; width: 130px;"
+                                                        src="<?php echo base_url($product['product_image']); ?>"
+                                                        alt="<?php echo $product['product_name']; ?>">
+                                                </a>
                                                 <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
                                                     MOST
                                                 </div>
@@ -161,14 +168,18 @@ $this->load->view('frontend/includes/header');
                                             </div>
                                             <div class="d-flex border-top">
                                                 <small class="w-50 text-center border-end py-2">
-                                                    <a class="text-body" href="product_detail.php?id=<?php echo $product['product_id']; ?>">
+                                                    <a class="text-body" href="<?php echo base_url('products/detail/' . $product['product_id']) ?>">
                                                         <i class="fa fa-eye text-primary me-2"></i>View detail
-                                                       </a>
+                                                    </a>
                                                 </small>
                                                 <small class="w-50 text-center py-2">
-                                                    <a class="text-body" href="add_to_cart.php?id=<?php echo $product['product_id']; ?>">
-                                                        <i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart
-                                                    </a>
+                                                    <?php if ($product['stock'] > 0) { ?>
+                                                        <a class="text-body" onclick="addToCartProduct(<?php echo $product['product_id']; ?>);">
+                                                            <i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart
+                                                        </a>
+                                                    <?php } else { ?>
+                                                        <a style="color:red"><strong>Out Of Stock</strong></a>
+                                                    <?php } ?>
                                                 </small>
                                             </div>
                                         </div>

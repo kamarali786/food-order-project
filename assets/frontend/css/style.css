@@ -179,7 +179,7 @@
         position: relative;
         min-height: 450px;
     }
-    
+
     #header-carousel .carousel-item img {
         position: absolute;
         width: 100%;
@@ -381,4 +381,134 @@
 
 .footer .copyright a:hover {
     color: var(--primary);
+}
+
+.product-image {
+
+    max-height: 500px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 102px;
+
+}
+
+.product-image:hover {
+
+    transform: translateY(-5px);
+}
+
+.product-price {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #28a745;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #6c757d;
+}
+
+.stars i {
+    color: #ff9900;
+}
+
+.add-to-cart-btn {
+    background-color: #ff7f50;
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #e67e22;
+}
+
+.product-card {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.related-products img {
+    max-width: 140px;
+    max-height: 250px;
+    object-fit: cover;
+}
+
+.related-product-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.related-product-price {
+    font-size: 1.1rem;
+    color: #28a745;
+}
+
+@media (max-width: 767px) {
+    .product-gallery {
+        display: flex;
+        overflow-x: scroll;
+        gap: 10px;
+    }
+
+    .product-gallery img {
+        height: 80px;
+        width: 80px;
+    }
+}
+
+.modal-content {
+    border-radius: 10px;
+    overflow: hidden;
+}
+.modal-header {
+    background-color: #343a40;
+}
+.modal-title {
+    font-size: 1.5rem;
+}  
+.modal-body img {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}  
+.modal-footer {
+    border-top: 1px solid #e9ecef;
+    padding: 1rem;
+    background: #f8f9fa;
+}  
+.btn-success {
+    background-color: #28a745;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}  
+.btn-success:hover {
+    background-color: #218838;
+}  
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+} 
+input[type="number"] {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    text-align: center;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
 }

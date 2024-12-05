@@ -1,3 +1,4 @@
+<?php $this->load->view('frontend/includes/commonPopups'); ?>
 <?php
   $query = $this->db->order_by('id')->get('settings');
 
@@ -67,6 +68,7 @@
     <script src="<?php echo base_url('assets/frontend/lib/waypoints/waypoints.min.js')?>"></script>
     <script src="<?php echo base_url('assets/frontend/lib/owlcarousel/owl.carousel.min.js')?>"></script>
     <script src="<?php echo base_url('assets/frontend/js/main.js')?>"></script>
+    <script src="<?php echo base_url('assets/frontend/js/custom.js')?>"></script>
 
 </body>
 
