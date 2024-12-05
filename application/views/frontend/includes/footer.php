@@ -15,32 +15,32 @@
 ?>
 <!-- Footer Start -->
 <div class="container-fluid bg-dark footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container py-5">
-            <div class="row g-5 ">
-                <div class="col-lg-5 col-md-6">
-                    <img src="<?php echo !empty($setting['logo']) ? base_url($setting['logo']):""?>" alt="Logo" width="100" height="60">
-                    <p><?php echo !empty($setting['about'])?$setting['about']:""?></p>
-                    <div class="d-flex pt-2">
-                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href="<?php echo $setting['x_url'];?>"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href="<?php echo $setting['fb_url'];?>"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href="<?php echo $setting['yt_url'];?>"><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-square btn-outline-light rounded-circle me-0" href="<?php echo $setting['insta_url'];?>"><i class="fab fa-instagram"></i></a>
-                    </div>
+    <div class="container py-5">
+        <div class="row g-5 ">
+            <div class="col-lg-5 col-md-6">
+                <img src="<?php echo !empty($setting['logo']) ? base_url($setting['logo']):""?>" alt="Logo" width="100" height="60">
+                <p><?php echo !empty($setting['about'])?$setting['about']:""?></p>
+                <div class="d-flex pt-2">
+                    <a class="btn btn-square btn-outline-light rounded-circle me-1" href="<?php echo $setting['x_url'];?>"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-square btn-outline-light rounded-circle me-1" href="<?php echo $setting['fb_url'];?>"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-square btn-outline-light rounded-circle me-1" href="<?php echo $setting['yt_url'];?>"><i class="fab fa-youtube"></i></a>
+                    <a class="btn btn-square btn-outline-light rounded-circle me-0" href="<?php echo $setting['insta_url'];?>"><i class="fab fa-instagram"></i></a>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <h4 class="text-light mb-4">Address</h4>
-                    <p><i class="fa fa-map-marker-alt me-3"></i><?php echo !empty($setting['address'])?$setting['address']:""?></p>
-                    <p><i class="fa fa-phone-alt me-3"></i><?php echo !empty($setting['phone_number'])?$setting['phone_number']:""?></p>
-                    <p><i class="fa fa-envelope me-3"></i><?php echo !empty($setting['email'])?$setting['email']:""?></p>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">Quick Links</h4>
-                    <a class="btn btn-link" href="<?php echo base_url('about-us')?>">About Us</a>
-                    <a class="btn btn-link" href="<?php echo base_url('contact-us')?>">Contact Us</a>
-                    <a class="btn btn-link" href="">Our Services</a>
-                    <a class="btn btn-link" href="">Terms & Condition</a>
-                    <a class="btn btn-link" href="">Support</a>
-                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <h4 class="text-light mb-4">Address</h4>
+                <p><i class="fa fa-map-marker-alt me-3"></i><?php echo !empty($setting['address'])?$setting['address']:""?></p>
+                <p><i class="fa fa-phone-alt me-3"></i><?php echo !empty($setting['phone_number'])?$setting['phone_number']:""?></p>
+                <p><i class="fa fa-envelope me-3"></i><?php echo !empty($setting['email'])?$setting['email']:""?></p>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h4 class="text-light mb-4">Quick Links</h4>
+                <a class="btn btn-link" href="<?php echo base_url('about-us')?>">About Us</a>
+                <a class="btn btn-link" href="<?php echo base_url('contact-us')?>">Contact Us</a>
+                <a class="btn btn-link" href="">Our Services</a>
+                <a class="btn btn-link" href="">Terms & Condition</a>
+                <a class="btn btn-link" href="">Support</a>
+            </div>
         </div>
         <div class="container-fluid copyright mt-5">
             <div class="container">
@@ -63,13 +63,35 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="<?php echo base_url('assets/frontend/lib/wow/wow.min.js')?>"></script>
     <script src="<?php echo base_url('assets/frontend/lib/easing/easing.min.js')?>"></script>
     <script src="<?php echo base_url('assets/frontend/lib/waypoints/waypoints.min.js')?>"></script>
     <script src="<?php echo base_url('assets/frontend/lib/owlcarousel/owl.carousel.min.js')?>"></script>
+    <script type="text/javascript">
+        var BASE_URL = "<?php echo base_url(); ?>";
+    </script>
     <script src="<?php echo base_url('assets/frontend/js/main.js')?>"></script>
     <script src="<?php echo base_url('assets/frontend/js/custom.js')?>"></script>
-
+    <script>
+        toastr.options = {
+            closeButton: true, 
+            debug: false,
+            newestOnTop: true,
+            progressBar: true, 
+            positionClass: "toast-top-right", 
+            preventDuplicates: true,
+            onclick: null,
+            showDuration: "300",
+            hideDuration: "1000",
+            timeOut: "5000",
+            extendedTimeOut: "1000",
+            showEasing: "swing",
+            hideEasing: "linear",
+            showMethod: "fadeIn",
+            hideMethod: "fadeOut",
+        };
+    </script>
 </body>
 
 </html>

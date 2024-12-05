@@ -471,44 +471,76 @@
     border-radius: 10px;
     overflow: hidden;
 }
+
 .modal-header {
     background-color: #343a40;
+    padding: 25px;
 }
+
 .modal-title {
     font-size: 1.5rem;
-}  
+}
+
 .modal-body img {
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}  
+}
+
 .modal-footer {
     border-top: 1px solid #e9ecef;
     padding: 1rem;
     background: #f8f9fa;
-}  
+}
+
 .btn-success {
     background-color: #28a745;
     border: none;
     padding: 0.5rem 1.5rem;
     font-size: 1rem;
-    transition: background 0.3s ease;
-}  
+    transition: background 0.7s ease;
+}
+
 .btn-success:hover {
     background-color: #218838;
-}  
+}
+
 .btn-secondary {
-    background-color: #6c757d;
+    background-color: rgb(125, 3, 3);
     border: none;
-} 
+}
+
 input[type="number"] {
     border: 1px solid #ced4da;
     border-radius: 5px;
     text-align: center;
 }
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    margin: 0; 
+    margin: 0;
 }
+
+input.is-invalid {
+    border-color: red;
+    background-color: #f8d7da;
+}
+
+@media (min-width: 1025px) {
+    .h-custom {
+    height: 100vh !important;
+    }
+    }
+    
+    .card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+    }
+    
+    .card-registration .select-arrow {
+    top: 13px;
+    }

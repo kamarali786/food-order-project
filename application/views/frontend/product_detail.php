@@ -85,7 +85,7 @@ $this->load->view('frontend/includes/header');
                                     </small>
                                     <small class="w-50 text-center py-2">
                                         <?php if ($related_product->stock > 0) { ?>
-                                            <a class="text-body" onclick="addToCartProduct(<?php echo $related_product->product_id; ?>);">
+                                            <a class="text-body" onclick="showProductOnCart(<?php echo $related_product->product_id; ?>);">
                                                 <i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart
                                             </a>
                                         <?php } else { ?>

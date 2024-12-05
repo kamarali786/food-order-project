@@ -1,8 +1,6 @@
-<?php
+<?php $this->load->view('frontend/includes/links');
+$this->load->view('frontend/includes/header'); ?>
 
-$this->load->view('frontend/includes/links');
-$this->load->view('frontend/includes/header');
-?>
 <!-- Carousel Start -->
 <div class="container-fluid p-0 mb-5 wow fadeIn" data-wow-delay="0.1s">
     <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
@@ -174,7 +172,7 @@ $this->load->view('frontend/includes/header');
                                                 </small>
                                                 <small class="w-50 text-center py-2">
                                                     <?php if ($product['stock'] > 0) { ?>
-                                                        <a class="text-body" onclick="addToCartProduct(<?php echo $product['product_id']; ?>);">
+                                                        <a class="text-body" onclick="showProductOnCart(<?php echo $product['product_id']; ?>);">
                                                             <i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart
                                                         </a>
                                                     <?php } else { ?>

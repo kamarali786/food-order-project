@@ -41,4 +41,5 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="<?php echo base_url('assets/frontend/css/bootstrap.min.css')?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/frontend/css/style.css')?>" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
 </head>
