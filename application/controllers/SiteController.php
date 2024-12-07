@@ -115,27 +115,22 @@ class SiteController extends CI_Controller
 	{
 		$productId = $this->input->post('productId');
 		$selectedQuantity = $this->input->post('selectedProductQuantity');
-
-		// Fetch product details from the database
 		$product = $this->db->where(['product_id' => $productId, 'is_delete' => 0, 'status' => 1])
 			->get('products')
 			->row();
 
 		if (!empty($product)) {
-			// Check stock availability
 			if ($product->stock < $selectedQuantity) {
 				echo json_encode(['error' => 1, 'message' => 'Stock limit exceeded!']);
 				exit;
 			}
 
-			// Initialize the cart
 			$cart = $this->session->userdata('cart') ?: [];
 			$productExists = false;
 
-			// Check if the product already exists in the cart
-			foreach ($cart as $item) {
+			// Use reference to modify the cart item directly
+			foreach ($cart as &$item) {
 				if ($item['product_id'] == $productId) {
-					// Update the quantity and total price
 					$item['selected_quantity'] += $selectedQuantity;
 					$item['total_price'] = $item['price'] * $item['selected_quantity'];
 					$productExists = true;
@@ -143,7 +138,7 @@ class SiteController extends CI_Controller
 				}
 			}
 
-			// If the product is not in the cart, add it as a new entry
+			// If product does not exist in cart, add it
 			if (!$productExists) {
 				$cart[] = [
 					'product_id' => $product->product_id,
@@ -161,8 +156,8 @@ class SiteController extends CI_Controller
 					'total_price' => $product->price * $selectedQuantity,
 				];
 			}
-			
-			// Save the updated cart back to the session
+
+			// Update the session with the modified cart
 			$this->session->set_userdata('cart', $cart);
 
 			echo json_encode(['success' => 1, 'message' => 'Product added to cart successfully!']);
@@ -172,8 +167,74 @@ class SiteController extends CI_Controller
 			exit;
 		}
 	}
-	public function goToCart()
+
+	public function deleteItemFromCart()
 	{
-		$this->load->view('frontend/cart.php');
+		$product_id = $this->input->post('productId');
+		$cart = $this->session->userdata('cart') ?? [];
+		if (!empty($cart)) {
+			$itemFound = false;
+
+			foreach ($cart as $key => $item) {
+				if ($item['product_id'] == $product_id) {
+					unset($cart[$key]);
+					$itemFound = true;
+					break;
+				}
+			}
+
+			$this->session->set_userdata('cart', $cart);
+			if ($itemFound) {
+				$cartItemCount = count($cart);
+				echo json_encode(['success' => 1, 'message' => 'Product removed from cart successfully!', 'cartItemCount' => $cartItemCount]);
+			} else {
+				echo json_encode(['error' => 1, 'message' => 'Product not found in cart!']);
+			}
+		} else {
+			echo json_encode(['error' => 1, 'message' => 'Cart is empty!']);
+		}
+	}
+
+	public function cart()
+	{
+		$cartData = '';
+		if (!empty($this->session->userdata('cart'))) {
+			$cartData = $this->session->userdata('cart');
+			foreach ($cartData as $key => $item) {
+				$product_data = $this->db->where('product_id', $item['product_id'])->get('products')->row_array();
+				if ($product_data) {
+					if ($product_data['status'] != 1 || $product_data['is_delete'] != 0) {
+						unset($item[$key]);
+					}
+				}
+			}
+			$this->session->set_userdata('cart', $cartData);
+		}
+		$this->load->view('frontend/cart.php', array('cartData' => $cartData));
+	}
+
+	public function updateProductQuantityCart()
+	{
+		// Post Param
+		$productId = $this->input->post('productId');
+		$updatedProductQuantity = $this->input->post('updatedProductQuantity');
+
+		$productData = $this->db->where(['product_id' => $productId, 'status' => 1, 'is_delete' => 0])->get('products')->row();
+		if ($productData) {
+			$totalPriceOfProdcut = NULL;
+			$cartData = $this->session->userdata('cart');
+			foreach ($cartData as $key => $cartItem) {
+				if ($productData->product_id == $cartItem['product_id']) {
+					$cartData[$key]['selected_quantity'] = $updatedProductQuantity;
+					$cartData[$key]['total_price'] = $cartItem['price'] * $updatedProductQuantity;
+					$totalPriceOfProdcut = $cartData[$key]['total_price'];
+				}
+			}
+			// Update Session Data
+			$this->session->set_userdata('cart', $cartData);
+			echo json_encode(['success' => 1, 'message' => 'Product Quantity Updated Successfully!', 'cartItemData' => number_format($totalPriceOfProdcut)]);
+		} else {
+			echo json_encode(['error' => 1, 'message' => 'Product Not Found!']);
+		}
 	}
 }

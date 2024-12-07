@@ -90,7 +90,7 @@ $route['setting/add-setting'] = 'SettingController/add_Setting';
 
 $route['products/detail/(:any)'] = 'SiteController/product_detail/$1';
 $route['addToCart'] = 'SiteController/addToCart';
-$route['goToCart'] = 'SiteController/goToCart';
+$route['cart'] = 'SiteController/cart';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
