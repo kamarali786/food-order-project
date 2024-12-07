@@ -36,8 +36,16 @@ $this->load->view('frontend/includes/header'); ?>
                                         <p><span class="text-muted">Product Stock: </span> <span class="text-success" id="stock"><?php echo $item['stock'] ?> </span></p>
                                     </div>
                                     <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                        <input id="quantity" min="0" name="quantity" data-product-id="<?php echo $item['product_id']; ?>" data-actual-stock="<?php echo $item['stock'] ?>" value="<?php echo $item['selected_quantity'] ?>" type="number"
+                                        <input id="quantity"
+                                            min="0"
+                                            name="quantity"
+                                            data-product-id="<?php echo $item['product_id']; ?>"
+                                            data-actual-stock="<?php echo $item['stock'] ?>"
+                                            value="<?php echo $item['selected_quantity'] ?>"
+                                            type="number"
+                                            step="1"
                                             class="form-control form-control-sm" />
+
                                     </div>
                                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                                         <h5 class="mb-0 cart-item-total-price-of-product">₹<?php echo number_format($item['total_price']) ?></h5>
@@ -51,11 +59,12 @@ $this->load->view('frontend/includes/header'); ?>
                     <?php } ?>
                     <div class="card">
                         <div class="card-body">
-                        <button style="float: right;" type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-warning btn-block btn-lg">Proceed to Pay</button>
-                            <a href="<?php echo base_url('products')?>" style="float: left;"  data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-block btn-lg">Continue Shopping</a>
+                            <button style="float: right;" type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-warning btn-block btn-lg">Proceed to Pay</button>
+                            <a href="<?php echo base_url('products') ?>" style="float: left;" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-block btn-lg">Continue Shopping</a>
                         </div>
                     </div>
-                <?php } else { // If cartData is empty ?>
+                <?php } else { // If cartData is empty 
+                ?>
                     <div class="card rounded-3 mb-4">
                         <div class="card-body">
                             <div class="row d-flex justify-content-between align-items-center">

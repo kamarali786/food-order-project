@@ -49,13 +49,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+
 $route['default_controller'] = 'SiteController';
+
+// ----------------------------------- Frontend Routes --------------------------------------
+$route['about-us'] = 'SiteController/about';
+
+$route['contact-us'] = 'SiteController/contactus';
+
+$route['products'] = 'SiteController/products';
+$route['products/detail/(:any)'] = 'SiteController/product_detail/$1';
+
+$route['addToCart'] = 'SiteController/addToCart';
+$route['cart'] = 'SiteController/cart';
+
+$route['login'] = 'FrontendAuthController/login';
+$route['register'] = 'FrontendAuthController/register';
+
+// ------------------------------------- Backend Routes ---------------------------------------
+
 $route['admin-login'] = 'AuthController';
 $route['admin-login/login'] = 'AuthController/login';
-
-$route['about-us'] = 'SiteController/about';
-$route['contact-us'] = 'SiteController/contactus';
-$route['products'] = 'SiteController/products';
 
 $route['dashboard'] = 'DashboardController';
 $route['logout'] = 'AuthController/logout';
@@ -87,10 +101,6 @@ $route['product/edit-product/(:any)'] = 'ProductController/edit_product/$1';
 
 $route['setting'] = 'SettingController';
 $route['setting/add-setting'] = 'SettingController/add_Setting';
-
-$route['products/detail/(:any)'] = 'SiteController/product_detail/$1';
-$route['addToCart'] = 'SiteController/addToCart';
-$route['cart'] = 'SiteController/cart';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -19,7 +19,7 @@
         <hr class="text-muted">
         <div class="d-flex align-items-center mb-3">
             <label class="me-3 fw-bold">Quantity:</label>
-            <input type="number" name="selected_product_quantity" class="form-control w-25 text-center shadow-sm" value="" min="1" max="100">
+            <input type="number" name="selected_product_quantity" class="form-control w-25 text-center shadow-sm selected-product-quantity-main" value="" min="1" max="100">
         </div>
         <input type="hidden" name="available_product_quantity" id="available_product_quantity" value="<?php echo $product->stock; ?>">
         <input type="hidden" name="prodcut_id" id="prodcut_id" value="<?php echo $product->product_id; ?>">

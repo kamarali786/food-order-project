@@ -1,7 +1,24 @@
-// Disbled Updown Key In Add To Cart
+// disable up and down key
+// allow only number in add to cart
+
 $(document).ready(function () {
-	$("#quantity").on("keydown", function (event) {
+	$(".add-to-cart-main #quantity").on("keydown", function (event) {
 		if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+			event.preventDefault();
+		}
+	});
+
+	$(".add-to-cart-main #quantity").on("input", function () {
+		let value = $(this).val();
+		// Replace non-integer characters with an empty string
+		if (!Number.isInteger(parseFloat(value))) {
+			$(this).val(Math.floor(value || 0));
+		}
+	});
+
+	// Prevent typing non-numeric characters
+	$(".add-to-cart-main #quantity").on("keypress", function (event) {
+		if (event.which < 48 || event.which > 57) {
 			event.preventDefault();
 		}
 	});
@@ -17,16 +34,27 @@ function showProductOnCart(productId) {
 			$("#spinner").css({ visibility: "visible", opacity: "1" });
 		},
 		success: function (response) {
-			$("#spinner").css({visibility: "hidden", opacity: "0"});
+			$("#spinner").css({ visibility: "hidden", opacity: "0" });
 			if (response.success) {
 				$(".add-to-cart-model-body-main").html(response.productAddToCartData);
+                $(".add-to-cart-model-body-main .selected-product-quantity-main").on("input", function () {
+                    let value = $(this).val();
+                    if (!Number.isInteger(parseFloat(value))) {
+                        $(this).val(Math.floor(value || 0));
+                    }
+                });
+                $(".add-to-cart-model-body-main .selected-product-quantity-main").on("keypress", function (event) {
+                    if (event.which < 48 || event.which > 57) {
+                        event.preventDefault();
+                    }
+                });
 				$("#addToCartModel").modal("show");
 			} else {
 				toastr.error(response.message);
 			}
 		},
 		error: function () {
-			$("#spinner").css({visibility: "hidden", opacity: "0"});
+			$("#spinner").css({ visibility: "hidden", opacity: "0" });
 			toastr.error("An error occurred while adding the product to the cart.");
 		},
 	});
@@ -34,14 +62,18 @@ function showProductOnCart(productId) {
 
 function addToCartProduct() {
 	let productId = $("input[name=prodcut_id]").val();
-	let availableProductQuantity = $("input[name=available_product_quantity]").val();
-	let selectedProductQuantity = $("input[name=selected_product_quantity]").val();
+	let availableProductQuantity = $(
+		"input[name=available_product_quantity]"
+	).val();
+	let selectedProductQuantity = $(
+		"input[name=selected_product_quantity]"
+	).val();
 
 	// Check Quantity Greater The 1
 	if (selectedProductQuantity < 1) {
 		$("input[name=selected_product_quantity]").addClass("is-invalid");
 		toastr.error("Please Select Proper Quantity");
-        return false;
+		return false;
 	} else {
 		$("input[name=selected_product_quantity]").removeClass("is-invalid");
 	}
@@ -57,26 +89,26 @@ function addToCartProduct() {
 		type: "POST",
 		data: data,
 		dataType: "json",
-        beforeSend: function () {
+		beforeSend: function () {
 			$("#spinner").css({ visibility: "visible", opacity: "1" });
 		},
 		success: function (response) {
-            $("#spinner").css({visibility: "hidden", opacity: "0"});
+			$("#spinner").css({ visibility: "hidden", opacity: "0" });
 			if (response.success) {
 				$("#addToCartModel").modal("hide");
 				toastr.success(response.message);
 
-                // Redirect To Cart
-                setTimeout(function () {
-                    window.location.href = BASE_URL + "cart";
-                }, 1000);
+				// Redirect To Cart
+				setTimeout(function () {
+					window.location.href = BASE_URL + "cart";
+				}, 1000);
 			} else {
 				toastr.error(response.message);
 				$("input[name=selected_product_quantity]").addClass("is-invalid");
 			}
 		},
 		error: function () {
-            $("#spinner").css({visibility: "hidden", opacity: "0"});
+			$("#spinner").css({ visibility: "hidden", opacity: "0" });
 			toastr.error("An error occurred while adding the product to the cart.");
 		},
 	});
@@ -91,16 +123,16 @@ function deleteItemFromCart(productId) {
 		type: "POST",
 		data: data,
 		dataType: "json",
-        beforeSend: function () {
+		beforeSend: function () {
 			$("#spinner").css({ visibility: "visible", opacity: "1" });
 		},
 		success: function (response) {
-            $("#spinner").css({visibility: "hidden", opacity: "0"});
+			$("#spinner").css({ visibility: "hidden", opacity: "0" });
 			if (response.success) {
-                // Update Cart Total Item Count
-                $('.total-selected-item-on-cart').text(response.cartItemCount);
+				// Update Cart Total Item Count
+				$(".total-selected-item-on-cart").text(response.cartItemCount);
 
-                // Remove Prodcut From Cart
+				// Remove Prodcut From Cart
 				$("#productDelete" + productId).remove("");
 				toastr.success(response.message);
 			} else {
@@ -108,7 +140,7 @@ function deleteItemFromCart(productId) {
 			}
 		},
 		error: function () {
-            $("#spinner").css({visibility: "hidden", opacity: "0"});
+			$("#spinner").css({ visibility: "hidden", opacity: "0" });
 			toastr.error("An error occurred while adding the product to the cart.");
 		},
 	});
@@ -120,8 +152,8 @@ $(document).ready(function () {
 		var productId = $(this).data("product-id");
 		var actualStock = $(this).data("actual-stock");
 		var updatedProductQuantity = $(this).val();
-		
-        if (updatedProductQuantity <= 0 || updatedProductQuantity > actualStock) {
+
+		if (updatedProductQuantity <= 0 || updatedProductQuantity > actualStock) {
 			$(this).addClass("is-invalid");
 
 			if (updatedProductQuantity <= 0) {
@@ -129,7 +161,7 @@ $(document).ready(function () {
 			} else if (updatedProductQuantity > actualStock) {
 				toastr.error("Stock limit exceeded!");
 			}
-            return false;
+			return false;
 		} else {
 			$(this).removeClass("is-invalid");
 		}
@@ -143,22 +175,24 @@ $(document).ready(function () {
 			type: "POST",
 			data: data,
 			dataType: "json",
-            beforeSend: function () {
-                $("#spinner").css({ visibility: "visible", opacity: "1" });
-            },
+			beforeSend: function () {
+				$("#spinner").css({ visibility: "visible", opacity: "1" });
+			},
 			success: function (response) {
-                $("#spinner").css({visibility: "hidden", opacity: "0"});
+				$("#spinner").css({ visibility: "hidden", opacity: "0" });
 				if (response.success) {
-                    if(response.cartItemData) {
-                        $('#productDelete' + productId).find('.cart-item-total-price-of-product').text('₹' + response.cartItemData);
-                    }
+					if (response.cartItemData) {
+						$("#productDelete" + productId)
+							.find(".cart-item-total-price-of-product")
+							.text("₹" + response.cartItemData);
+					}
 					toastr.success(response.message);
 				} else {
 					toastr.error(response.message);
 				}
 			},
 			error: function () {
-                $("#spinner").css({visibility: "hidden", opacity: "0"});
+				$("#spinner").css({ visibility: "hidden", opacity: "0" });
 				toastr.error("An error occurred while update product to the cart.");
 			},
 		});
