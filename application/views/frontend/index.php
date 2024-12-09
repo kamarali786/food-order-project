@@ -158,7 +158,7 @@ $this->load->view('frontend/includes/header'); ?>
                                                 </div>
                                             </div>
                                             <div class="text-center p-4">
-                                                <a class="d-block h5 mb-2" href="#">
+                                                <a class="d-block h5 mb-2" href="<?php echo base_url('products/detail/' . $product['product_id']) ?>">
                                                     <?php echo $product['product_name']; ?>
                                                 </a>
                                                 <span class="text-primary me-1">₹<?php echo number_format($product['price']); ?></span>

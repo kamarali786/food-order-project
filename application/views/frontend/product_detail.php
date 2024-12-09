@@ -41,13 +41,13 @@ $this->load->view('frontend/includes/header');
                 <p><?php echo $product->description; ?></p>
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div>
-                        <span class="product-price">₹<?php echo $product->price ?></span>
-                        <span class="old-price ms-2">₹<?php echo $product->mrp ?></span>
+                        <span class="product-price">₹<?php echo number_format($product->price) ?></span>
+                        <span class="old-price ms-2">₹<?php echo number_format($product->mrp) ?></span>
                     </div>
                     <span class="badge bg-success"><?php echo ($product->stock > 0) ? "In stock" : "" ?></span>
                 </div>
                 <?php if ($product->stock > 0): ?>
-                    <a href="add_to_cart.php?id=product_id" class="btn btn-primary w-100">
+                    <a class="btn btn-primary w-100" onclick="showProductOnCart(<?php echo $product->product_id; ?>);">
                         <i class="fa fa-shopping-bag me-2"></i> Add to Cart
                     </a>
 
@@ -75,9 +75,9 @@ $this->load->view('frontend/includes/header');
                                     </a>
                                 </div>
                                 <div class="text-center p-4">
-                                    <a class="d-block h5 mb-2" href=""><?php echo $related_product->product_name ?></a>
-                                    <span class="text-primary me-1">₹<?php echo $related_product->price ?></span>
-                                    <span class="text-body text-decoration-line-through">₹<?php echo $related_product->mrp ?></span>
+                                    <a class="d-block h5 mb-2" href="<?php echo base_url('products/detail/' . $product->product_id) ?>"><?php echo $related_product->product_name ?></a>
+                                    <span class="text-primary me-1">₹<?php echo number_format($related_product->price) ?></span>
+                                    <span class="text-body text-decoration-line-through">₹<?php echo number_format($related_product->mrp) ?></span>
                                 </div>
                                 <div class="d-flex border-top">
                                     <small class="w-50 text-center border-end py-2">

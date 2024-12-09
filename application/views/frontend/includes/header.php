@@ -52,7 +52,7 @@ if ($query) {
                     <small class="fa fa-shopping-cart text-body"></small>
                     <!-- Cart Item Count -->
                     <?php $cartItemCount = $this->session->userdata('cart');
-                    if (!empty($cartItemCount)) { ?>
+                    if (!empty($cartItemCount) || (!$cartItemCount <= 0)) { ?>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             <span class="total-selected-item-on-cart"><?php echo count($cartItemCount); ?></span>
                         </span>

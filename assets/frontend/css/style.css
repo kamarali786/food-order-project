@@ -4,6 +4,7 @@
     --secondary: #F65005;
     --light: #F7F8FC;
     --dark: #111111;
+    --base-url: 'http://localhost/food/';
 }
 
 .back-to-top {
@@ -544,3 +545,38 @@ input.is-invalid {
     .card-registration .select-arrow {
     top: 13px;
     }
+
+    /* login page css */
+.card-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh; /* Ensures full viewport height */
+        background-color: #f4f4f4; /* Optional: To visualize the container */
+        margin: 0; /* Ensures no unwanted spacing */
+    }
+    
+    .card {
+        
+        border: #28a745;
+        border-color: #28a745;
+        border-width: 10px;
+        border-radius: 15px;
+        padding: 20px;
+        width: 100%; /* Responsive width */
+        max-width: 1500px; /* Optional: Limits the card width */
+        /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); Optional: Adds depth */
+    }
+    
+    .btn-custom {
+        border:none;
+        color: #000000;
+        width: 100%; /* Optional: Makes button span the card's width */
+        padding: 10px 15px;
+        border-radius: 8px;
+    }
+    
+    .btn-custom:hover {
+        background-color: #0c8b36;
+    }
+    
