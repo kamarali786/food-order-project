@@ -22,23 +22,23 @@ $this->load->view('frontend/includes/header'); ?>
                 <form id="auth-form" action="<?= base_url('login')?>" method = "post">
                     <div class="mb-3">
                         <label for="email" class="form-label">Email Address</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                        <input type="email" class="form-control" id="email" name="email"  placeholder="Enter your email">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <div class="input-group" id="password-messeage">
-                            <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                            <input type="password" class="form-control" id="password"  name="password" placeholder="Enter your password">
                             <button type="button" class="btn btn-outline-success" id="togglePassword">
                                 <i class="bi bi-eye-slash" id="eyeIcon"></i> 
                             </button>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-end align-items-center mb-3">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
                         <!-- <div>
                             <input type="checkbox" id="remember" class="form-check-input">
                             <label for="remember" class="form-check-label">Remember Me</label>
                         </div> -->
-                        <a href="#" class="text-decoration-none text-primary">Forgot Password?</a>
+                        <a type="submit" class="text-decoration-none text-primary">Forgot Password?</a>
                     </div>
                     <button type="submit" class="btn btn-custom btn-primary w-100">Login</button>
                 </form>
@@ -51,3 +51,13 @@ $this->load->view('frontend/includes/header'); ?>
 </div>
 
 <?php $this->load->view('frontend/includes/footer')?>
+<?php if($this->session->flashdata('success_message')): ?>
+    <script type="text/javascript">
+    toastr.success("<?php echo $this->session->flashdata('success_message'); ?>");
+    </script>
+<?php endif; ?>
+<?php if ($this->session->flashdata('error_message')):?>
+    <script type="text/javascript">
+        toastr.error("<?php echo $this->session->flashdata('error_message'); ?>");
+    </script>
+<?php endif; ?>

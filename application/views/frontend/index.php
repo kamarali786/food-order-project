@@ -323,3 +323,8 @@ $this->load->view('frontend/includes/header'); ?>
 </div>
 <!-- Blog End -->
 <?php $this->load->view('frontend/includes/footer'); ?>
+<?php if($this->session->flashdata('success_message')): ?>
+    <script type="text/javascript">
+        toastr.success("<?php echo $this->session->flashdata('success_message'); ?>");
+    </script>
+<?php endif; ?>

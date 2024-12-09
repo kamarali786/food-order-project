@@ -25,7 +25,7 @@ class ProductController extends CI_Controller
         $this->load->view('backend/add_product', $data);
 
         //Check if the form is submitted
-        if ($this->input->server('REQUEST_METHOD') === 'POST') {
+        
             // Collect form input
             $productData = $this->input->post();
             // Set form validation rules

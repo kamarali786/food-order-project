@@ -205,85 +205,92 @@ $(document).ready(function () {
 	});
 });
 $(document).ready(function () {
-	$("#auth-form").on("submit", function (e) {
-		e.preventDefault();
-
-		$(".error").remove();
-
-		var fname = $("#fname").val();
-		var lname = $("#lname").val();
-		var email = $("#email").val();
-		var password = $("#password").val();
-		var confirmPassword = $("#confrinPassword").val();
-
-		var isValid = true;
-
-		var namePattern = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
-
-		// Validate First Name
-		if (fname === "") {
-			isValid = false;
-			$("#fname").after(
-				'<div class="error text-danger pt-1">First name is required</div>'
-			);
-		} else if (!namePattern.test(fname)) {
-			isValid = false;
-			$("#fname").after(
-				'<div class="error text-danger pt-1">Invalid first name format</div>'
-			);
-
-		}
-
-		// Validate Last Name
-		if (lname === "") {
-			isValid = false;
-			$("#lname").after(
-				'<div class="error text-danger pt-1">last name is required</div>'
-			);
-		} else if (!namePattern.test(lname)) {
-			isValid = false;
-			$("#lname").after(
-				'<div class="error text-danger pt-1">Invalid last name format</div>'
-			);
-
-		}
-
-		var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-		if (email === "" || !emailPattern.test(email)) {
-			isValid = false;
-			$("#email").after(
-				'<div class="error text-danger pt-1">Please enter a valid email</div>'
-			);
-		}
-
-		var passwordPattern =
-			/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&_]{8,}$/;
-		if (password === "") {
-			isValid = false;
-			$("#password-messeage").after(
-				'<div class="error text-danger pt-1">Password is required</div>'
-			);
-		} else if (password.length < 8) {
-			isValid = false;
-			$("#password-messeage").after(
-				'<div class="error text-danger pt-1">Password must be at least 8 characters long</div>'
-			);
-		} else if (!passwordPattern.test(password)) {
-			isValid = false;
-			$("#password-messeage").after(
-				'<div class="error text-danger pt-1">Password must include at least one letter, one digit, and one special character	</div>'
-			);
-		}
-		if (confirmPassword !== password) {
+   
+    var isRegisterForm = $("#auth-form").attr('action').includes('register');  
+    
+    $("#auth-form").on("submit", function (e) {
+        e.preventDefault();
+        
+        $(".error").remove();
+        
+        var fname = $("#fname").val();
+        var lname = $("#lname").val();
+        var email = $("#email").val();
+        var password = $("#password").val();
+        var confirmPassword = $("#confirmPassword").val();
+        
+        var isValid = true;
+        
+        var namePattern = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+        
+  
+        if (isRegisterForm && fname === "") {
             isValid = false;
-            $('#confrinPassword').after('<div class="error text-danger">Passwords do not match</div>');
+            $("#fname").after(
+                '<div class="error text-danger pt-1">First name is required</div>'
+            );
+        } else if (isRegisterForm && !namePattern.test(fname)) {
+            isValid = false;
+            $("#fname").after(
+                '<div class="error text-danger pt-1">Invalid first name format</div>'
+            );
+        }
+        
+       
+        if (isRegisterForm && lname === "") {
+            isValid = false;
+            $("#lname").after(
+                '<div class="error text-danger pt-1">Last name is required</div>'
+            );
+        } else if (isRegisterForm && !namePattern.test(lname)) {
+            isValid = false;
+            $("#lname").after(
+                '<div class="error text-danger pt-1">Invalid last name format</div>'
+            );
         }
 
-		if (isValid) {
-			this.submit();
-		}
-	});
+       
+        var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        if (email === "" || !emailPattern.test(email)) {
+            isValid = false;
+            $("#email").after(
+                '<div class="error text-danger pt-1">Please enter a valid email</div>'
+            );
+        }
+
+        
+        var passwordPattern =
+            /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&_]{8,}$/;
+        if (password === "") {
+            isValid = false;
+            $("#password-messeage").after(
+                '<div class="error text-danger pt-1">Password is required</div>'
+            );
+        } else if (password.length < 8) {
+            isValid = false;
+            $("#password-messeage").after(
+                '<div class="error text-danger pt-1">Password must be at least 8 characters long</div>'
+            );
+        } else if (!passwordPattern.test(password)) {
+            isValid = false;
+            $("#password-messeage").after(
+                '<div class="error text-danger pt-1">Password must include at least one letter, one digit, and one special character</div>'
+            );
+        }
+
+        
+        if (isRegisterForm && confirmPassword !== password) {
+            isValid = false;
+            $('#confirmPassword').after('<div class="error text-danger">Passwords do not match</div>');
+        }
+
+        
+        if (isValid) {
+            this.submit();
+        }
+    });
 });
+
 $(document).ready(function () {
 	$("#togglePassword").on("click", function () {
 		var passwordField = $("#password");
