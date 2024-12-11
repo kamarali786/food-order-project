@@ -531,93 +531,412 @@ input.is-invalid {
 
 @media (min-width: 1025px) {
     .h-custom {
-    height: 100vh !important;
+        height: 100vh !important;
     }
-    }
-    
-    .card-registration .select-input.form-control[readonly]:not([disabled]) {
+}
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
     font-size: 1rem;
     line-height: 2.15;
     padding-left: .75em;
     padding-right: .75em;
-    }
-    
-    .card-registration .select-arrow {
+}
+
+.card-registration .select-arrow {
     top: 13px;
+}
+
+/* login page css */
+.card-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    /* Ensures full viewport height */
+    background-color: #f4f4f4;
+    /* Optional: To visualize the container */
+    margin: 0;
+    /* Ensures no unwanted spacing */
+}
+
+.card {
+
+    border: #28a745;
+    border-color: #28a745;
+    border-width: 10px;
+    border-radius: 15px;
+    padding: 20px;
+    width: 100%;
+    /* Responsive width */
+    max-width: 1500px;
+    /* Optional: Limits the card width */
+    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); Optional: Adds depth */
+}
+
+.btn-custom {
+    border: none;
+    color: #000000;
+    width: 100%;
+    /* Optional: Makes button span the card's width */
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.btn-custom:hover {
+    background-color: #0c8b36;
+}
+
+.user-dropdown {
+    position: relative;
+}
+
+.dropdown-button {
+    background-color: #ff4500;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.dropdown-button:hover {
+    background-color: #e63946;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.user-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.userProfile .card {
+    background-color: #98ff98;
+    padding: 30px;
+}
+
+.userProfile .card .card-header {
+    background-color: #87ceeb;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: large;
+    font-family: 'Lato', sans-serif;
+    margin-bottom: 40px;
+    color: white;
+}
+
+.userProfile .card .label {
+    font-family: 'Raleway', sans-serif;
+
+}
+
+.userProfile .card .form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #000000;
+}
+
+.userProfile .card .form-control {
+    width: 100%;
+    padding: 15px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #f6f6f6;
+
+}
+
+textarea .form-group {
+    height: 80px;
+    resize: vertical;
+}
+
+.userProfile .card .btn-primary {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background-color: rgb(125, 3, 3);
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 10px;
+}
+
+/* Button Hover */
+.userProfile .card .btn-primary:hover {
+    background-color: rgb(130, 30, 15);
+}
+
+.is-invalid::placeholder {
+    color: #dc3545;
+}
+
+.userProfile .card input[value] {
+    color: #000000;
+}
+
+.userProfile .card textarea:not(:placeholder-shown) {
+    color: #000;
+}
+
+/* Profile Image Section */
+.profile-image-section {
+    display: inline-block;
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 600px;
+    margin: 0 auto;
+}
+
+/* Profile Image */
+.profile-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #007bff;
+    transition: all 0.3s ease;
+}
+
+.profile-img:hover {
+    transform: scale(1.1);
+    border-color: #0056b3;
+}
+
+
+.profile-name {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-top: 15px;
+    text-transform: capitalize;
+    width: auto;
+}
+
+@media (max-width: 576px) {
+    .profile-image-section {
+        width: 80%;
+        padding: 15px;
     }
 
-    /* login page css */
-.card-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh; /* Ensures full viewport height */
-        background-color: #f4f4f4; /* Optional: To visualize the container */
-        margin: 0; /* Ensures no unwanted spacing */
+    .profile-img {
+        width: 120px;
+        height: 120px;
     }
-    
-    .card {
-        
-        border: #28a745;
-        border-color: #28a745;
-        border-width: 10px;
-        border-radius: 15px;
-        padding: 20px;
-        width: 100%; /* Responsive width */
-        max-width: 1500px; /* Optional: Limits the card width */
-        /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); Optional: Adds depth */
+
+    .profile-name {
+        font-size: 1.5rem;
     }
-    
-    .btn-custom {
-        border:none;
-        color: #000000;
-        width: 100%; /* Optional: Makes button span the card's width */
-        padding: 10px 15px;
-        border-radius: 8px;
+
+    .profile-bio {
+        font-size: 0.9rem;
     }
-    
-    .btn-custom:hover {
-        background-color: #0c8b36;
-    }
-    .user-dropdown {
-        position: relative;
-    }
-    
-    .dropdown-button {
-        background-color: #ff4500;
-        color: white;
-        border: none;
-        padding: 8px 15px;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: 500;
-    }
-    
-    .dropdown-button:hover {
-        background-color: #e63946;
-    }
-    
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #f9f9f9;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-        z-index: 1;
-    }
-    
-    .dropdown-content a {
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-    }
-    
-    .dropdown-content a:hover {
-        background-color: #ddd;
-    }
-    
-    .user-dropdown:hover .dropdown-content {
-        display: block;
-    }
-    
+}
+
+.dataNotFound .card-body {
+    background-color: #98ff98;
+    border: 2px solid #000;
+    box-shadow: 0 4px 10px rgba(0, 86, 179, 0.3);
+    padding: 20px;
+    border-radius: 8px;
+    font-family: 'Arial', sans-serif;
+    transition: all 0.3s ease-in-out;
+}
+
+.dataNotFound .card-body:hover {
+    box-shadow: 0 10px 20px rgba(0, 86, 179, 0.5);
+    transform: translateY(-5px);
+    background-color: #66ff66;
+    border-color: #0056b3;
+    transition: all 0.3s ease-in-out;
+}
+
+.toast {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    color: #fff;
+}
+
+.toast-success {
+    background-color: #28a745;
+    /* Green for success */
+    border-left: 5px solid #155724;
+    /* Dark Green border */
+}
+
+.toast-error {
+    background-color: #dc3545;
+    /* Red for error */
+    border-left: 5px solid #721c24;
+    /* Dark Red border */
+}
+
+.toast-info {
+    background-color: #17a2b8;
+    /* Blue for info */
+    border-left: 5px solid #117a8b;
+    /* Dark Blue border */
+}
+
+.toast-warning {
+    background-color: #ffc107;
+    /* Yellow for warning */
+    border-left: 5px solid #d39e00;
+    /* Dark Yellow border */
+}
+
+/* Adding a subtle animation effect */
+.toast {
+    animation: fadeInUp 0.5s ease, fadeOutDown 0.5s ease 2.5s;
+}
+
+/* css for Checkout Page */
+
+.checkout-header {
+    color: #fff;
+    padding: 30px 0;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-header h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+/* Card Styles */
+.card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    background-color: #a1c6ea;  
+
+}
+.checkout .card-header{
+    background-color: #65aaf0;
+    font-weight: 700;
+    border-radius: 25px;
+    box-shadow: #0056b3;
+}
+
+/* Checkout Section */
+.checkout-container {
+    padding: 50px 15px;
+    background-color: #f9f9f9;
+}
+
+/* Checkout Form Styles */
+.form-control {
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    margin-bottom: 20px;
+    border-color: #000000;
+}
+
+.form-control:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+}
+
+.form-check-label {
+    font-size: 14px;
+    color: #3f3e3e;
+}
+
+.btn-checkout {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    width: 100%;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-checkout:hover {
+    background-color: #218838;
+}
+
+/* Order Summary */
+/* Style for order summary container */
+.order-summary {
+    background-color: #a1c6ea; 
+
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-summary h4 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.order-items-container {
+    max-height: 300px;  /* You can adjust this height as per your design */
+    overflow-y: auto;   /* Enable scrolling when content overflows */
+}
+
+.list-group-item {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    border-bottom: 1px solid #ddd;
+}
+
+.product-thumbnail img {
+    width: 50px;  /* Thumbnail size */
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.total-price {
+    font-weight: bold;
+    color: #333;
+}
+
+hr {
+    border-top: 1px solid #ddd;
+    margin: 15px 0;
+}

@@ -11,7 +11,7 @@ class ProductController extends CI_Controller
         }
         $this->load->model('ProductModel');
         $this->load->model('SubCategoryModel');
-        $this->load->model('CategoryModel');            
+        $this->load->model('CategoryModel');
     }
 
     public function product()
@@ -25,64 +25,64 @@ class ProductController extends CI_Controller
         $this->load->view('backend/add_product', $data);
 
         //Check if the form is submitted
-        
-            // Collect form input
-            $productData = $this->input->post();
-            // Set form validation rules
-            $this->form_validation->set_rules('product_name', 'product Name', 'required|regex_match[/^[a-zA-Z0-9\s\&\-\,]+$/]');
-            $this->form_validation->set_rules('stock', 'Stock', 'required|numeric');
-            $this->form_validation->set_rules('quantity', 'Quantity', 'required|alpha_numeric');
-            $this->form_validation->set_rules('price', 'Price', 'required|numeric');
-            $this->form_validation->set_rules('mrp', 'MRP', 'required');
-            $this->form_validation->set_rules('description', 'Description', 'required|min_length[10]|max_length[1000]');
 
-            $config['upload_path']   = './uploads/product/';
-            $config['allowed_types'] = 'jpg|png|jpeg';
-            $config['max_size']      = 1024; // 1 MB
-            $config['file_name']     = date('YmdHis', time());
+        // Collect form input
+        $productData = $this->input->post();
+        // Set form validation rules
+        $this->form_validation->set_rules('product_name', 'product Name', 'required|regex_match[/^[a-zA-Z0-9\s\&\-\,]+$/]');
+        $this->form_validation->set_rules('stock', 'Stock', 'required|numeric');
+        $this->form_validation->set_rules('quantity', 'Quantity', 'required|alpha_numeric');
+        $this->form_validation->set_rules('price', 'Price', 'required|numeric');
+        $this->form_validation->set_rules('mrp', 'MRP', 'required');
+        $this->form_validation->set_rules('description', 'Description', 'required|min_length[10]|max_length[1000]');
 
-            $this->load->library('upload', $config);
-            $form_valid = $this->form_validation->run();
-            $file_valid = $this->upload->do_upload('file');
-            if (!$form_valid) {
-                $this->session->set_flashdata('productName_error', form_error('product_name'));
-                $this->session->set_flashdata('subCategory_error', form_error('subCategory_id'));
-                $this->session->set_flashdata('description_error', form_error('description'));
-                $this->session->set_flashdata('stock_error', form_error('stock'));
-                $this->session->set_flashdata('quantity_error', form_error('quantity'));
-                $this->session->set_flashdata('price_error', form_error('price'));
-                $this->session->set_flashdata('mrp_error', form_error('mrp'));
-            }
-            if (!$file_valid) {
-                $this->session->set_flashdata('file_error', $this->upload->display_errors());
-            }
-            if (!$form_valid || !$file_valid) {
-                $this->session->set_flashdata('product_name', $this->input->post('product_name'));
-                $this->session->set_flashdata('description', $this->input->post('description'));
-                $this->session->set_flashdata('category_id', $this->input->post('category_id'));
-                $this->session->set_flashdata('stock', $this->input->post('stock'));
-                $this->session->set_flashdata('quantity', $this->input->post('quantity'));
-                $this->session->set_flashdata('price', $this->input->post('price'));
-                $this->session->set_flashdata('mrp', $this->input->post('mrp'));    
-                redirect(base_url('product/add-product'));
+        $config['upload_path']   = './uploads/product/';
+        $config['allowed_types'] = 'jpg|png|jpeg';
+        $config['max_size']      = 1024; // 1 MB
+        $config['file_name']     = date('YmdHis', time());
+
+        $this->load->library('upload', $config);
+        $form_valid = $this->form_validation->run();
+        $file_valid = $this->upload->do_upload('file');
+        if (!$form_valid) {
+            $this->session->set_flashdata('productName_error', form_error('product_name'));
+            $this->session->set_flashdata('subCategory_error', form_error('subCategory_id'));
+            $this->session->set_flashdata('description_error', form_error('description'));
+            $this->session->set_flashdata('stock_error', form_error('stock'));
+            $this->session->set_flashdata('quantity_error', form_error('quantity'));
+            $this->session->set_flashdata('price_error', form_error('price'));
+            $this->session->set_flashdata('mrp_error', form_error('mrp'));
+        }
+        if (!$file_valid) {
+            $this->session->set_flashdata('file_error', $this->upload->display_errors());
+        }
+        if (!$form_valid || !$file_valid) {
+            $this->session->set_flashdata('product_name', $this->input->post('product_name'));
+            $this->session->set_flashdata('description', $this->input->post('description'));
+            $this->session->set_flashdata('category_id', $this->input->post('category_id'));
+            $this->session->set_flashdata('stock', $this->input->post('stock'));
+            $this->session->set_flashdata('quantity', $this->input->post('quantity'));
+            $this->session->set_flashdata('price', $this->input->post('price'));
+            $this->session->set_flashdata('mrp', $this->input->post('mrp'));
+            redirect(base_url('product/add-product'));
+        } else {
+            // File upload successful
+            $uploadData = $this->upload->data();
+            $productData['product_image'] = "uploads/product/" . $uploadData['file_name'];
+
+            // Save subcategory to the database
+            $productAdd = $this->ProductModel->add_product($productData);
+
+            if ($productAdd) {
+                $this->session->set_flashdata('success', 'Product added successfully.');
+                redirect(base_url('product'));
             } else {
-                // File upload successful
-                $uploadData = $this->upload->data();
-                $productData['product_image'] = "uploads/product/" . $uploadData['file_name'];
-
-                // Save subcategory to the database
-                $productAdd = $this->ProductModel->add_product($productData);
-
-                if ($productAdd) {
-                    $this->session->set_flashdata('success', 'Product added successfully.');
-                    redirect(base_url('product'));
-                } else {
-                    $this->session->set_flashdata('error', 'Something went wrong. Please try again later.');
-                    redirect(base_url('product/add-product'));
-                }
+                $this->session->set_flashdata('error', 'Something went wrong. Please try again later.');
+                redirect(base_url('product/add-product'));
             }
         }
     }
+    
     public function delete_product($id)
     {
 
@@ -95,7 +95,7 @@ class ProductController extends CI_Controller
     public function get_product($id)
 
     {
-        $data['CategoryData'] = $this->CategoryModel->Category();                                                   
+        $data['CategoryData'] = $this->CategoryModel->Category();
         $data['editData'] = $this->ProductModel->get_product($id);
         if ($data['CategoryData'] && $data['editData']) {
             $this->load->view('backend/add_product', $data);
@@ -134,9 +134,9 @@ class ProductController extends CI_Controller
             $config['allowed_types'] = 'jpg|png|jpeg';
             $config['max_size']      = 1024;
             $config['file_name'] = date('His', time());
-
+            
             $this->load->library('upload', $config);
-            if (!empty($_FILES['file']['name'])) {
+            if (!empty($_FILES['file']['name'])) {  
                 if (!$this->upload->do_upload('file')) {
                     $this->session->set_flashdata('file_error', $this->upload->display_errors());
                     redirect('product/get-product/' . $id);

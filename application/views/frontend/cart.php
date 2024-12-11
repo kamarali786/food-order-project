@@ -65,7 +65,7 @@ $this->load->view('frontend/includes/header'); ?>
                     </div>
                 <?php } else { // If cartData is empty 
                 ?>
-                    <div class="card rounded-3 mb-4">
+                    <div class=" dataNotFound card rounded-3 mb-4">
                         <div class="card-body">
                             <div class="row d-flex justify-content-between align-items-center">
                                 <div class="col-md-12 col-lg-12 col-xl-12">

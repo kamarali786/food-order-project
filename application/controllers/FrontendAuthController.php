@@ -8,20 +8,14 @@ class FrontendAuthController extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('FrontendAuthModel');
-	}
-
-	public function index()
-	{
-		if ($this->session->userdata('admin_id')) {
-			redirect(base_url('dashboard'));
-		} else {
-			$this->load->view('backend/login');
-		}
+		$this->load->model('CartModel');
 	}
 
 	public function login()
 	{
-		$this->load->view('frontend/login');
+		if ($this->session->userdata('user')) {
+			redirect(base_url(''));
+		}
 		if ($this->input->server('REQUEST_METHOD') === 'POST') {
 			$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 			$this->form_validation->set_rules('password', 'Password', 'required');
@@ -37,9 +31,9 @@ class FrontendAuthController extends CI_Controller
 				if ($user) {
 					if (password_verify($password, $user->password)) {
 						$this->session->set_userdata('user', $user);
+						$cartSuccess = $this->CartModel->cartAddInDatabase();
+						redirect(base_url(''));
 						$this->session->set_flashdata('success_message', 'Login Succesfully.');
-
-						redirect(base_url('#'));
 					} else {
 
 						$this->session->set_flashdata('error_message', 'Invalid email or password.');
@@ -52,12 +46,15 @@ class FrontendAuthController extends CI_Controller
 				}
 			}
 		}
+		$this->load->view('frontend/login');
 	}
 
 
 	public function register()
 	{
-		$this->load->view('register');
+		if ($this->session->userdata('user')) {
+			redirect(base_url(''));
+		}
 		if ($this->input->server('REQUEST_METHOD') === 'POST') {
 			$this->form_validation->set_rules('fname', 'First Name', 'required|alpha');
 			$this->form_validation->set_rules('lname', 'Last Name', 'required|regex_match[/^[a-zA-Z ]+$/]');
@@ -88,10 +85,12 @@ class FrontendAuthController extends CI_Controller
 				}
 			}
 		}
+		$this->load->view('register');
 	}
 	public function logout()
 	{
-		unset($_SESSION['user']);
+		$this->session->unset_userdata('user');
 		redirect(base_url('login'));
 	}
 }
+

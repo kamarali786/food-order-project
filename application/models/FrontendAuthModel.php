@@ -24,12 +24,24 @@ class FrontendAuthModel extends CI_Model
     public function login($email)
     {
         $getData = $this->db->where(['email' => $email, 'type' => 'user', 'is_delete' => 0, 'status' => 1])->get('users')->row();
-        if($getData)
-        {   
-            return $getData;    
-        }else
-        {
+        if ($getData) {
+            return $getData;
+        } else {
             return false;
         }
     }
+
+    public function saveUserData($userData) {
+        $user = $this->session->userdata('user');
+        $user_id = $user->user_id;
+        $userData['updated_at'] = date('Y-m-d h:i:s');
+
+        $query =  $this->db->where('user_id', $user_id)->update('users', $userData);
+        if ($query) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
 }

@@ -153,9 +153,10 @@ $this->load->view('frontend/includes/header'); ?>
                                                         src="<?php echo base_url($product['product_image']); ?>"
                                                         alt="<?php echo $product['product_name']; ?>">
                                                 </a>
-                                                <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">
-                                                    MOST
+                                                <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3" style="font-size: 14px; font-weight: bold; letter-spacing: 1px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);">
+                                                    Most Popular
                                                 </div>
+
                                             </div>
                                             <div class="text-center p-4">
                                                 <a class="d-block h5 mb-2" href="<?php echo base_url('products/detail/' . $product['product_id']) ?>">
@@ -323,7 +324,7 @@ $this->load->view('frontend/includes/header'); ?>
 </div>
 <!-- Blog End -->
 <?php $this->load->view('frontend/includes/footer'); ?>
-<?php if($this->session->flashdata('success_message')): ?>
+<?php if ($this->session->flashdata('success_message')): ?>
     <script type="text/javascript">
         toastr.success("<?php echo $this->session->flashdata('success_message'); ?>");
     </script>

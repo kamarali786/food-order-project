@@ -67,6 +67,9 @@ $route['login'] = 'FrontendAuthController/login';
 $route['register'] = 'FrontendAuthController/register';
 $route['user-logout'] = 'FrontendAuthController/logout';
 
+$route['user-profile'] = 'SiteController/userProfile';
+
+
 
 // ------------------------------------- Backend Routes ---------------------------------------
 

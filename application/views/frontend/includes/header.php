@@ -62,26 +62,32 @@ if ($user_data) {
                 <div class="user-dropdown">
                     <button class="dropdown-button btn-sm-square rounded-circle ms-3"><small class="fa fa-user text-white"></small></button>
                     <div class="dropdown-content">
-                        <a href="/profile">Profile</a>
                         <?php if (isset($href) && ($href == 'http://localhost/food/login')): ?>
                             <a href="<?php echo base_url('login') ?>">Log In</a>
-                                <?php else: ?>
-                                <a href="<?= base_url('user-logout') ?>">Logout</a>
-                            <?php endif; ?>
-                        </div>
+                        <?php else: ?>
+                            <a href="<?php echo base_url('user-profile'); ?>">Profile</a>
+                            <a href="<?= base_url('user-logout') ?>">Logout</a>
+                        <?php endif; ?>
                     </div>
-                    <a class="btn-sm-square rounded-circle ms-3 position-relative" style="background-color: #ff4500;" href="<?php echo base_url('cart') ?>">
-                        <small class="fa fa-shopping-cart"></small>
-                        <!-- Cart Item Count -->
-                        <?php $cartItemCount = $this->session->userdata('cart');
-                        if (!empty($cartItemCount) || (!$cartItemCount <= 0)) { ?>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                <span class="total-selected-item-on-cart"><?php echo count($cartItemCount); ?></span>
-                            </span>
-                        <?php } ?>
-                    </a>
                 </div>
+                <a class="btn-sm-square rounded-circle ms-3 position-relative bg-white" href="<?php echo base_url('cart') ?>">
+                    <small class="fa fa-shopping-cart"></small>
+                    <!-- Cart Item Count -->
+                    <?php if (!empty($this->session->userdata('user'))) {
+                        $user = $this->session->userdata('user');
+                        $user_id = $user->user_id;
+                        $cartItemCount = $this->CartModel->getCartItemCount($user_id);
+                    } else {
+                        $cartItem = $this->session->userdata('cart');
+                        $cartItemCount = count($cartItem);
+                    }
+                    if (!empty($cartItemCount) || (!$cartItemCount <= 0)) { ?>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            <span class="total-selected-item-on-cart"><?php echo $cartItemCount; ?></span>
+                        </span>
+                    <?php } ?>
+                </a>
             </div>
-        </nav>
-    </div>
-
+        </div>
+    </nav>
+</div>
