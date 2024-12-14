@@ -234,5 +234,9 @@ $this->load->view('frontend/includes/header');
 <!-- Testimonial End -->
 
 <?php
-$this->load->view('frontend/includes/footer');
-?>
+$this->load->view('frontend/includes/footer'); ?>
+<?php if ($this->session->flashdata('error_message')): ?>
+    <script type="text/javascript">
+        toastr.success("<?php echo $this->session->flashdata('error_message'); ?>");
+    </script>
+<?php endif; ?>

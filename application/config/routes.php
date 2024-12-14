@@ -69,6 +69,12 @@ $route['user-logout'] = 'FrontendAuthController/logout';
 
 $route['user-profile'] = 'SiteController/userProfile';
 
+$route['checkout'] = 'SiteController/checkout';
+
+$route['order'] = 'SiteController/order';
+
+$route['order/details/(:any)'] = 'SiteController/orderDetails/$1';
+
 
 
 // ------------------------------------- Backend Routes ---------------------------------------
@@ -107,5 +113,5 @@ $route['product/edit-product/(:any)'] = 'ProductController/edit_product/$1';
 $route['setting'] = 'SettingController';
 $route['setting/add-setting'] = 'SettingController/add_Setting';
 
-$route['404_override'] = '';
+$route['404_override'] = 'Custom404';
 $route['translate_uri_dashes'] = FALSE;

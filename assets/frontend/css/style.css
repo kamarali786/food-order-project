@@ -837,29 +837,31 @@ textarea .form-group {
 }
 
 /* Card Styles */
-.card {
+.checkout .card {
     border: none;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-    background-color: #a1c6ea;  
+    background-color: #a1c6ea;
 
 }
-.checkout .card-header{
-    background-color: #65aaf0;
+
+.checkout .card-header {
+    background-color: rgb(125, 3, 3);
     font-weight: 700;
     border-radius: 25px;
     box-shadow: #0056b3;
+    color: white;
 }
 
 /* Checkout Section */
-.checkout-container {
+.checkout .checkout-container {
     padding: 50px 15px;
     background-color: #f9f9f9;
 }
 
 /* Checkout Form Styles */
-.form-control {
+.checkout .form-control {
     border-radius: 8px;
     padding: 12px;
     border: 1px solid #ccc;
@@ -868,18 +870,18 @@ textarea .form-group {
     border-color: #000000;
 }
 
-.form-control:focus {
+.checkout .form-control:focus {
     border-color: #28a745;
     box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
 }
 
-.form-check-label {
+.checkout .form-check-label {
     font-size: 14px;
     color: #3f3e3e;
 }
 
-.btn-checkout {
-    background-color: #28a745;
+.checkout .btn-checkout {
+    background-color: rgb(125, 3, 3);
     color: white;
     border: none;
     padding: 15px;
@@ -891,14 +893,14 @@ textarea .form-group {
     transition: background-color 0.3s ease-in-out;
 }
 
-.btn-checkout:hover {
+.checkout .btn-checkout:hover {
     background-color: #218838;
 }
 
 /* Order Summary */
 /* Style for order summary container */
 .order-summary {
-    background-color: #a1c6ea; 
+    background-color: #a1c6ea;
 
     padding: 20px;
     border-radius: 8px;
@@ -911,8 +913,10 @@ textarea .form-group {
 }
 
 .order-items-container {
-    max-height: 300px;  /* You can adjust this height as per your design */
-    overflow-y: auto;   /* Enable scrolling when content overflows */
+    max-height: 574px;
+    /* You can adjust this height as per your design */
+    overflow-y: auto;
+    /* Enable scrolling when content overflows */
 }
 
 .list-group-item {
@@ -925,7 +929,8 @@ textarea .form-group {
 }
 
 .product-thumbnail img {
-    width: 50px;  /* Thumbnail size */
+    width: 50px;
+    /* Thumbnail size */
     height: 50px;
     object-fit: cover;
     border-radius: 5px;
@@ -939,4 +944,124 @@ textarea .form-group {
 hr {
     border-top: 1px solid #ddd;
     margin: 15px 0;
+}
+
+.payment-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.payment-header {
+    text-align: center;
+    margin-bottom: 35px;
+    background-color: rgb(125, 3, 3);
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.payment-method {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.payment-method:hover {
+    border-color: #007bff;
+    background-color: #f0f8ff;
+}
+
+.payment-method input {
+    margin-right: 10px;
+}
+
+.submit-btn {
+    background-color: rgb(125, 3, 3);
+    color: #fff;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: green;
+}
+
+/* Css For Order Page */
+/* Style for Product Thumbnails */
+.product-thumbnail {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+/* Card header styling */
+.card-header h5 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* Table Styling */
+.table th, .table td {
+    vertical-align: middle;
+}
+
+.table th {
+    background-color: #f8f9fa;
+}
+
+.table-bordered {
+    border: 1px solid #ddd;
+}
+
+/* Action buttons */
+.card-footer .btn {
+    font-size: 0.875rem;
+    padding: 0.5rem 1.5rem;
+    margin: 5px;
+}
+
+/* Order summary section */
+.order-summary h6 {
+    margin: 5px 0;
+    font-size: 1rem;
+}
+
+/* Css For OrderDetails Page */
+.order-header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+.order-summary-card {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border: none;
+    margin-bottom: 20px;
+}
+.order-summary-card .card-title {
+    font-weight: bold;
+    color: #343a40;
+}
+.product-thumbnail img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
+.badge-status {
+    font-size: 0.9em;
+    padding: 0.4em 0.7em;
+}
+.btn-back-orders {
+    margin-top: 20px;
 }

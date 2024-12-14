@@ -11,6 +11,7 @@ class SiteController extends CI_Controller
 		$this->load->model('BannerModel');
 		$this->load->model('FrontendAuthModel');
 		$this->load->model('CartModel');
+		$this->load->model('OrderModel');
 	}
 
 	public function index()
@@ -142,12 +143,19 @@ class SiteController extends CI_Controller
 			$this->db->where('product_id', $productId);
 			$existingCart = $this->db->get('carts')->row();
 
+			$totalQuantity = $selectedQuantity + ($existingCart ? $existingCart->selected_quantity : 0);
+
+			if ($totalQuantity > $product->stock) {
+				$totalQuantity = $product->stock;
+			}
+
+
 			if ($existingCart) {
 				$updatedData = [
-					'selected_quantity' => $existingCart['selected_quantity'] + $selectedQuantity,
-					'total_price' => $product->price * ($existingCart['selected_quantity'] + $selectedQuantity)
+					'selected_quantity' => $totalQuantity,
+					'total_price' => $product->price * $totalQuantity
 				];
-				$this->db->where('cart_id', $existingCart['id']);
+				$this->db->where('cart_id', $existingCart->cart_id);
 				$this->db->update('carts', $updatedData);
 			} else {
 				$data = [
@@ -165,8 +173,13 @@ class SiteController extends CI_Controller
 
 			foreach ($cart as &$item) {
 				if ($item['product_id'] == $productId) {
-					$item['selected_quantity'] += $selectedQuantity;
-					$item['total_price'] = $item['price'] * $item['selected_quantity'];
+					$totalQuantity = $item['selected_quantity'] + $selectedQuantity;
+
+					if ($totalQuantity > $product->stock) {
+						$totalQuantity = $product->stock;
+					}
+					$item['selected_quantity'] = $totalQuantity;
+					$item['total_price'] = $item['price'] * $totalQuantity;
 					$productExistsInSession = true;
 					break;
 				}
@@ -192,7 +205,7 @@ class SiteController extends CI_Controller
 
 			$this->session->set_userdata('cart', $cart);
 		}
-		echo json_encode(['success' => 1, 'message' => 'Product added to cart successfully!']);
+		echo json_encode(['success' => 1, 'message' => 'Your cart has been Added.!']);
 		exit;
 	}
 	public function deleteItemFromCart()
@@ -291,10 +304,11 @@ class SiteController extends CI_Controller
 				$this->db->where('product_id', $productId);
 				$this->db->update('carts', [
 					'selected_quantity' => $updatedProductQuantity,
-					'total_price' => $totalPriceOfProduct
+					'total_price' => $totalPriceOfProduct,
+					'updated_at' => date('Y-m-d H:i:s')
 				]);
 			}
-			echo json_encode(['success' => 1, 'message' => 'Product Quantity Updated Successfully!', 'cartItemData' => number_format($totalPriceOfProduct)]);
+			echo json_encode(['success' => 1, 'message' => 'Your cart has been updated!.', 'cartItemData' => number_format($totalPriceOfProduct)]);
 		} else {
 			echo json_encode(['error' => 1, 'message' => 'Product Not Found!']);
 		}
@@ -386,6 +400,138 @@ class SiteController extends CI_Controller
 
 	public function checkout()
 	{
-		$this->load->view('frontend/checkout');
+		$user = $this->session->userdata('user');
+		if (!$user) {
+			$this->session->set_flashdata('error_message', 'Please log in or sign up to proceed to checkout and complete your order. Your cart is saved for you!');
+			redirect(base_url('login'));
+		} else {
+			$user_id = $user->user_id;
+			$cartData = $this->CartModel->getCartData($user_id);
+			if (!$cartData) {
+				$this->session->set_flashdata('error_message', 'Your cart is empty. Add some items to proceed!');
+				redirect(base_url('products'));
+			} else {
+				$this->load->view('frontend/checkout', array(
+					'cartData' => $cartData,
+					'userData' => $user
+				));
+
+				if ($this->input->server('REQUEST_METHOD') === 'POST') {
+					$userData = $this->input->post();
+					$this->form_validation->set_rules('fullName', 'Full Name', 'required|regex_match[/^[a-zA-Z]+([\'\,\.\-]?[a-zA-Z ])*$/]');
+					$this->form_validation->set_rules('phone', 'Phone Number', 'required|exact_length[10]|numeric');
+					$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+					$this->form_validation->set_rules('address', 'Address', 'required|min_length[10]');
+					$this->form_validation->set_rules('city', 'City', 'required|alpha');
+					$this->form_validation->set_rules('state', 'State', 'required|alpha');
+					$this->form_validation->set_rules('country', 'Country', 'required|alpha');
+					$this->form_validation->set_rules('zipCode', 'Country', 'required|regex_match[/^\d{6}$/]');
+
+					$form_valid = $this->form_validation->run();
+
+					if (!$form_valid) {
+						$this->session->set_flashdata('fullName', $this->input->post('fullName'));
+						$this->session->set_flashdata('phone', $this->input->post('phone'));
+						$this->session->set_flashdata('email', $this->input->post('email'));
+						$this->session->set_flashdata('address', $this->input->post('address'));
+						$this->session->set_flashdata('city', $this->input->post('city'));
+						$this->session->set_flashdata('state', $this->input->post('state'));
+						$this->session->set_flashdata('country', $this->input->post('country'));
+						$this->session->set_flashdata('zipCode', $this->input->post('zipCode'));
+
+						redirect(base_url('checkout'));
+					} else {
+						$checkoutData = array(
+							'fullName' => $this->input->post('fullName'),
+							'phone' => $this->input->post('phone'),
+							'email' => $this->input->post('email'),
+							'city' => $this->input->post('city'),
+							'state' => $this->input->post('state'),
+							'country' => $this->input->post('country'),
+							'zipCode' => $this->input->post('zipCode')
+						);
+						$shipping_address = $this->input->post('address');
+						$total_amount =  $this->session->flashdata('total_amount');
+						$order_number = 'ORD-' . mt_rand(10000, 99999);
+						$payment_method = $_POST['paymentMethod'];
+						$payment_status = ($payment_method == 'cash_on_delivery') ? 'unpaid' : 'Paid';
+						$jsonCheckoutData = json_encode($checkoutData);
+						$orderData = array(
+							'user_id' => $user_id,
+							'order_number' => $order_number,
+							'order_date' => date('Y-m-d H:i:s'),
+							'order_status' => 'pending',
+							'billing_data' => $jsonCheckoutData,
+							'total_amount' => $total_amount,
+							'shipping_address' => $shipping_address,
+							'payment_method' => $payment_method,
+							'payment_status' => $payment_status,
+							'delivery_date' => date('Y-m-d H:i:s', strtotime('+6 days')),
+							'created_at' => date('Y-m-d H:i:s'),
+							'transaction_id' => generateTransactionIDWithTime()
+						);
+						$orderDetails = $this->db
+							->select('user_id,product_id,price,total_price,selected_quantity')
+							->from('carts')
+							->get()
+							->result_array();
+
+						if ($orderDetails) {
+							$orderSuccess = $this->OrderModel->orders($orderData, $orderDetails);
+							if ($orderSuccess) {
+								$deleteCartItems = $this->CartModel->deleteCartAllItem($user_id);
+								if ($deleteCartItems) {
+									$this->session->set_userdata('order_success', $orderSuccess);
+									$this->session->set_flashdata('success_message', 'Your order has been placed successfully. Thank you for shopping with us!');
+									redirect(base_url('order'));
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public function order()
+	{
+		$user = $this->session->userdata('user');
+		if (!$user) {
+			$this->session->set_flashdata('error_message', 'Please log in or sign up to proceed to checkout and complete your order. Your cart is saved for you!');
+			redirect(base_url('login'));
+		} else {
+			if ($this->session->userdata('order_success')) { 
+				$order_id = $this->session->userdata('order_success');
+				$this->load->view('frontend/thankyou', ['order_id' => $order_id]);
+			} else {
+				$user_id = $user->user_id;
+				$ordersData = $this->OrderModel->getOrdersData($user_id);
+				$this->load->view('frontend/order', array(
+					'orders' => $ordersData
+				));
+			}
+		}
+	}
+	public function orderDetails($order_id)
+	{
+		$user = $this->session->userdata('user');
+		if (!$user) {
+			$this->session->set_flashdata('error_message', 'Please log in or sign up to proceed to checkout and complete your order. Your cart is saved for you!');
+			redirect(base_url('login'));
+		} else {
+			if ($order_id) {
+				$user_id = $user->user_id;
+				$orderDataSuccess = $this->OrderModel->getOrderProductsData($user_id, $order_id);
+				if ($orderDataSuccess) {
+					$this->load->view('frontend/orderDetails', array(
+						'orderDetailsData' => $orderDataSuccess
+					));
+				} else {
+					$this->load->view('errors/custom_404');
+				}
+			} else {
+				redirect(base_url('order'));
+			}
+		}
 	}
 }

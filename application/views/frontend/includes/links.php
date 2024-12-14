@@ -42,4 +42,5 @@
     <link href="<?php echo base_url('assets/frontend/css/bootstrap.min.css')?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/frontend/css/style.css')?>" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.8/dist/sweetalert2.min.css" rel="stylesheet" />
 </head>

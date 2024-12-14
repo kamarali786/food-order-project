@@ -8,10 +8,18 @@ class CartModel extends CI_Model
         $cartItems = $this->session->userdata('cart');
         $userData = $this->session->userdata('user');
         $current_time = date('Y-m-d H:i:s');
+
         if ($cartItems) {
             foreach ($cartItems as $key => $item) {
                 $cartItems[$key]['user_id'] = $userData->user_id;
                 $cartItems[$key]['created_at'] = $current_time;
+
+                // Fetch the product to get stock information
+                $product = $this->db->where('product_id', $item['product_id'])->get('products')->row();
+
+                if (!$product) {
+                    continue; // Skip if the product does not exist
+                }
 
                 $this->db->where('user_id', $userData->user_id);
                 $this->db->where('product_id', $item['product_id']);
@@ -19,23 +27,33 @@ class CartModel extends CI_Model
 
                 if ($existing_item) {
                     $updated_quantity = $existing_item->selected_quantity + $item['selected_quantity'];
+
+                    // Check if the total quantity exceeds the stock
+                    if ($updated_quantity > $product->stock) {
+                        $updated_quantity = $product->stock; // Set quantity to the available stock
+                    }
+
                     $updated_total_price = $updated_quantity * $item['price'];
 
+                    // Update the cart item
                     $this->db->where('cart_id', $existing_item->cart_id);
                     $this->db->update('carts', [
                         'selected_quantity' => $updated_quantity,
                         'total_price' => $updated_total_price,
                         'updated_at' => $current_time
                     ]);
-                    return true;
+
                     unset($cartItems[$key]);
                 } else {
+                    // Add new item to insert list, ensuring stock limit is respected
+                    $insert_quantity = min($item['selected_quantity'], $product->stock);
+
                     $insertItems[] = [
                         'user_id' => $userData->user_id,
                         'product_id' => $item['product_id'],
-                        'selected_quantity' => $item['selected_quantity'],
+                        'selected_quantity' => $insert_quantity,
                         'price' => $item['price'],
-                        'total_price' => $item['total_price'],
+                        'total_price' => $item['price'] * $insert_quantity,
                         'created_at' => $current_time,
                     ];
                 }
@@ -44,7 +62,6 @@ class CartModel extends CI_Model
 
         if (!empty($insertItems)) {
             $this->db->insert_batch('carts', $insertItems);
-            return true;
         }
 
         $this->session->unset_userdata('cart');
@@ -57,6 +74,7 @@ class CartModel extends CI_Model
             ->from('carts')
             ->join('products', 'carts.product_id = products.product_id', 'inner')
             ->where(['carts.user_id' => $user_id])
+            ->order_by('carts.cart_id', 'DESC')
             ->get()
             ->result_array();
 
@@ -79,6 +97,16 @@ class CartModel extends CI_Model
     public function deleteCartItem($user_id, $product_id)
     {
         $query = $this->db->where(["user_id" => $user_id, "product_id" => $product_id])->delete('carts');
+
+        if ($query) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function deleteCartAllItem($user_id)
+    {
+        $query = $this->db->where(["user_id" => $user_id])->delete('carts');
 
         if ($query) {
             return true;

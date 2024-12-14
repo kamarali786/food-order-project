@@ -59,7 +59,7 @@ $this->load->view('frontend/includes/header'); ?>
                     <?php } ?>
                     <div class="card">
                         <div class="card-body">
-                            <button style="float: right;" type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-warning btn-block btn-lg">Proceed to Pay</button>
+                            <a style="float: right;" type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-warning btn-block btn-lg" href="<?= base_url('checkout');?>">Proceed to Pay</a>
                             <a href="<?php echo base_url('products') ?>" style="float: left;" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-block btn-lg">Continue Shopping</a>
                         </div>
                     </div>

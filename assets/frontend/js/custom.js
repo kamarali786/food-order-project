@@ -327,19 +327,23 @@ $(document).ready(function () {
 
 // validation of user profile page
 $(document).ready(function () {
+	var ischeckout = $("#user-profile").attr("action").includes("checkout");
 	$("#user-profile").on("submit", function (e) {
 		e.preventDefault();
 		$(".error").remove();
 
 		var fname = $("#fname").val();
 		var lname = $("#lname").val();
+		var fullName = $("#fullName").val();
 		var phone = $("#phone").val();
 		var address = $("#address").val();
 		var city = $("#city").val();
 		var state = $("#state").val();
 		var country = $("#country").val();
+		var zipCode = $("#zipCode").val();
 		var alphabeticRegex = /^[a-zA-Z\s]*$/;
 		var isValid = true;
+		console.log(zipCode);
 
 		var namePattern = /^[a-zA-Z]+([\'\,\.\-]?[a-zA-Z ])*$/;
 		// first name validation
@@ -366,6 +370,7 @@ $(document).ready(function () {
 		} else {
 			$("#lname").removeClass("is-invalid");
 		}
+
 		// phone number validation
 		if (phone === "") {
 			isValid = false;
@@ -380,10 +385,10 @@ $(document).ready(function () {
 			$("#phone").removeClass("is-invalid");
 		}
 		// address validation
-		if (address === "") {
+		if (address.trim() === "") {
 			isValid = false;
 			$("#address").addClass("is-invalid");
-		} else if (address.length < 10) {
+		} else if (address.trim().length < 10) {
 			isValid = false;
 			$("#address").addClass("is-invalid");
 			$("#address").after(
@@ -437,11 +442,16 @@ $(document).ready(function () {
 		// image validation
 
 		var profilePicture = $("#profile_picture")[0];
-		var profilePicture = profilePicture.files[0];
-		const maxSize = 2 * 1024 * 1024;
-		const allowedTypes = ["image/jpeg", "image/png", "image/gif", "image/jpg"];
-
-		console.log(profilePicture);
+		if (profilePicture) {
+			var profilePicture = profilePicture.files[0];
+			const maxSize = 2 * 1024 * 1024;
+			const allowedTypes = [
+				"image/jpeg",
+				"image/png",
+				"image/gif",
+				"image/jpg",
+			];
+		}
 		if (profilePicture) {
 			if (!allowedTypes.includes(profilePicture.type)) {
 				isValid = false;
@@ -477,3 +487,160 @@ $(document).ready(function () {
 		}
 	});
 });
+
+// payment method form and Biling Data from
+$(document).ready(function () {
+	$(".procees-to-payment-btn").on("click", function () {
+		$(".error").remove();
+
+		var fullName = $("#fullName").val();
+		var phone = $("#phone").val();
+		var email = $("#email").val();
+		var address = $("#address").val();
+		var city = $("#city").val();
+		var state = $("#state").val();
+		var country = $("#country").val();
+		var zipCode = $("#zipCode").val();
+		var alphabeticRegex = /^[a-zA-Z\s]*$/;
+		var isValid = true;
+
+		//fullname validation
+		var namePattern = /^[a-zA-Z]+([\'\,\.\-]?[a-zA-Z ])*$/;
+		if (fullName === "") {
+			isValid = false;
+			$("#fullName").addClass("is-invalid");
+		} else if (!namePattern.test(fullName)) {
+			isValid = false;
+			$("#fullName").after(
+				'<div class="error text-danger pt-1">Invalid Full Name Format</div>'
+			);
+		} else {
+			$("#fullName").removeClass("is-invalid");
+		}
+
+		// phone number validation
+		if (phone === "") {
+			isValid = false;
+			$("#phone").addClass("is-invalid");
+		} else if (phone.length > 10 || phone.length < 10) {
+			isValid = false;
+			$("#phone").addClass("is-invalid");
+			$("#phone").after(
+				'<div class="error text-danger pt-1">Invalid phone Number format</div>'
+			);
+		} else {
+			$("#phone").removeClass("is-invalid");
+		}
+		// email validation
+		var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+		if (email === "" || !emailPattern.test(email)) {
+			isValid = false;
+			$("#email").after(
+				'<div class="error text-danger pt-1">Please enter a valid email</div>'
+			);
+		}
+
+		// address validation
+		if (address.trim() === "") {
+			isValid = false;
+			$("#address").addClass("is-invalid");
+		} else if (address.trim().length < 10) {
+			isValid = false;
+			$("#address").addClass("is-invalid");
+			$("#address").after(
+				'<div class="error text-danger pt-1">Address Must be greather than 10 character</div>'
+			);
+		} else {
+			$("#address").removeClass("is-invalid");
+		}
+
+		// city validation
+		if (city === "") {
+			isValid = false;
+			$("#city").addClass("is-invalid");
+		} else if (!alphabeticRegex.test(city)) {
+			isValid = false;
+			$("#city").addClass("is-invalid");
+			$("#city").after(
+				'<div class="error text-danger pt-1">Only Character Allow</div>'
+			);
+		} else {
+			$("#city").removeClass("is-invalid");
+		}
+
+		// state validation
+		if (state === "") {
+			isValid = false;
+			$("#state").addClass("is-invalid");
+		} else if (!alphabeticRegex.test(state)) {
+			isValid = false;
+			$("#state").addClass("is-invalid");
+			$("#state").after(
+				'<div class="error text-danger pt-1">Only Character Allow</div>'
+			);
+		} else {
+			$("#state").removeClass("is-invalid");
+		}
+
+		// country validation
+		if (country === "") {
+			isValid = false;
+			$("#country").addClass("is-invalid");
+		} else if (!alphabeticRegex.test(country)) {
+			isValid = false;
+			$("#country").addClass("is-invalid");
+			$("#country").after(
+				'<div class="error text-danger pt-1">Only Character Allow</div>'
+			);
+		} else {
+			$("#country").removeClass("is-invalid");
+		}
+		// zip code validation
+
+		var zipCodePattern = /^\d{6}$/;
+
+		if (zipCode === "") {
+			isValid = false;
+			$("#zipCode").addClass("is-invalid");
+		} else if (!zipCodePattern.test(zipCode)) {
+			isValid = false;
+			$("#zipCode").after(
+				'<div class="error text-danger pt-1">Invalid ZipCode</div>'
+			);
+		} else {
+			$("#zipCode").removeClass("is-invalid");
+		}
+
+		if (isValid) {
+			$(".billing-infomation-section").css("display", "none");
+			$(".order-summery-section").css("display", "none");
+			$(".payment-method-section").css("display", "block");
+
+			$("#checkout").submit(function (event) {
+				if ($('input[name="paymentMethod"]:checked').length === 0) {
+					Swal.fire({
+						title: "hey!",
+						text: "Please select a payment method.",
+						icon: "warning",
+						confirmButtonText: "OK",
+						confirmButtonColor: "#3085d6",
+						background: "#fefefe",
+					});
+					event.preventDefault();
+				}
+			});
+		}
+	});
+});
+
+function generatePDF() {
+	const element = document.querySelector(".receipt-content"); // Select the content to convert to PDF
+	const options = {
+		margin: [20, 20, 20, 20], // Adjust margins to your preference
+		filename: "order_receipt.pdf",
+		image: { type: "jpeg", quality: 0.98 },
+		html2canvas: { scale: 2, logging: true, useCORS: true }, // Increase scale for better resolution
+		jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }, // A4 size
+	};
+	html2pdf().from(element).set(options).save();
+}

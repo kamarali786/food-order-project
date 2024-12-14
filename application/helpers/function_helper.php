@@ -30,3 +30,20 @@ if (!function_exists('modulesCount')) {
         return $count;
     }
 }
+if (!function_exists('dd')) {
+    function dd($data)
+    {
+        echo "<pre>";
+        print_r($data);
+        // echo "</pre>";
+        exit;
+    }
+}
+if (!function_exists('generateTransactionIDWithTime')) {
+    function generateTransactionIDWithTime($prefix = 'TXN')
+    {
+        $timestamp = time(); // Current UNIX timestamp
+        $randomNumber = mt_rand(100000, 999999); // 6-digit random number
+        return $prefix . $timestamp . $randomNumber;
+    }
+}

@@ -77,11 +77,11 @@ if ($user_data) {
                         $user = $this->session->userdata('user');
                         $user_id = $user->user_id;
                         $cartItemCount = $this->CartModel->getCartItemCount($user_id);
-                    } else {
+                    } else if (!empty($this->session->userdata('cart'))){
                         $cartItem = $this->session->userdata('cart');
-                        $cartItemCount = count($cartItem);
+                        $cartItemCount = count($cartItem);                                      
                     }
-                    if (!empty($cartItemCount) || (!$cartItemCount <= 0)) { ?>
+                    if (!empty($cartItemCount) && ($cartItemCount > 0)) { ?>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             <span class="total-selected-item-on-cart"><?php echo $cartItemCount; ?></span>
                         </span>

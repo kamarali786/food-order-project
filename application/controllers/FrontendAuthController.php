@@ -31,17 +31,17 @@ class FrontendAuthController extends CI_Controller
 				if ($user) {
 					if (password_verify($password, $user->password)) {
 						$this->session->set_userdata('user', $user);
-						$cartSuccess = $this->CartModel->cartAddInDatabase();
+						$this->CartModel->cartAddInDatabase();
+						$this->session->set_flashdata('success_message', 'Login successful! Welcome back.');
 						redirect(base_url(''));
-						$this->session->set_flashdata('success_message', 'Login Succesfully.');
 					} else {
 
-						$this->session->set_flashdata('error_message', 'Invalid email or password.');
+						$this->session->set_flashdata('error_message', 'Invalid username or password.');
 						redirect(base_url('login'));
 					}
 				} else {
 
-					$this->session->set_flashdata('error_message', 'User not exist! Please Register.');
+					$this->session->set_flashdata('error_message', 'Please verify your email to continue.');
 					redirect(base_url('login'));
 				}
 			}
