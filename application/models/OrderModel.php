@@ -48,7 +48,7 @@ class OrderModel extends CI_Model
         }
     }
 
-    public function getOrderProductsData($user_id = null, $order_id)
+    public function getOrderProductsData($user_id, $order_id)
     {
         $this->db->select('
         orders.order_id,

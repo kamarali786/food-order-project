@@ -8,6 +8,7 @@ class OrdersController extends CI_Controller
         parent::__construct();
         if (!$this->session->userdata('admin_id')) {
             redirect(base_url('admin-login'));
+            exit;
         }
 
         $this->load->model('OrderModel');
