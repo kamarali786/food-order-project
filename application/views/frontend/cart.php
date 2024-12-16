@@ -31,7 +31,7 @@ $this->load->view('frontend/includes/header'); ?>
                                     </div>
                                     <div class="col-md-3 col-lg-3 col-xl-3">
                                         <p class="lead fw-normal mb-2"><?= $item['product_name'] ?></p>
-                                        <p><span class="text-muted">Price: </span> <span class="text-success">₹<?php echo number_format($item['price']) ?> </span></p>
+                                        <p><span class="text-muted">Price: </span> <span class="text-success">₹<?php echo number_format($item['price'], 2) ?> </span></p>
                                         <p><span class="text-muted">Quantity: </span> <span class="text-success"><?php echo $item['quantity'] ?> </span></p>
                                         <p><span class="text-muted">Product Stock: </span> <span class="text-success" id="stock"><?php echo $item['stock'] ?> </span></p>
                                     </div>
@@ -48,7 +48,7 @@ $this->load->view('frontend/includes/header'); ?>
 
                                     </div>
                                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                        <h5 class="mb-0 cart-item-total-price-of-product">₹<?php echo number_format($item['total_price']) ?></h5>
+                                        <h5 class="mb-0 cart-item-total-price-of-product">₹<?php echo number_format($item['total_price'], 2) ?></h5>
                                     </div>
                                     <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                                         <a type="button" class="text-danger" onclick="deleteItemFromCart(<?php echo $item['product_id'] ?>)"><i class="fas fa-trash fa-lg"></i></a>

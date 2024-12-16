@@ -58,8 +58,8 @@ $this->load->view('backend/includes/header.php');
                                                     <td><?php echo $product->description?></td>
                                                     <td><?php echo $product->stock ?></td>
                                                     <td><?php echo $product->quantity?></td>
-                                                    <td>₹<?php echo $product->price?></td>
-                                                    <td>₹<?php echo $product->mrp?></td>
+                                                    <td>₹<?php echo number_format($product->price, 2)?></td>
+                                                    <td>₹<?php echo number_format($product->mrp, 2)?></td>
                                                     <td class="fw-bold text-primary"><?php echo ($product->status == 1) ? 'Active' : 'Inactive'; ?></td>
                                                     <td>
                                                         <a class="btn btn-warning" href="<?php echo base_url('product/get-product/' . $product->product_id); ?>">Edit</a>

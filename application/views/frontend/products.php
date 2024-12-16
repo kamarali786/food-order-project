@@ -78,8 +78,8 @@ $this->load->view('frontend/includes/header');
                                         <a class="d-block h5 mb-2" href="<?php echo base_url('products/detail/' . $product['product_id']) ?>">
                                             <?php echo $product['product_name']; ?>
                                         </a>
-                                        <span class="text-primary me-1">₹<?php echo number_format($product['price']); ?></span>
-                                        <span class="text-body text-decoration-line-through">₹<?php echo number_format($product['mrp']); ?></span>
+                                        <span class="text-primary me-1">₹<?php echo number_format($product['price'], 2); ?></span>
+                                        <span class="text-body text-decoration-line-through">₹<?php echo number_format($product['mrp'], 2); ?></span>
                                     </div>
                                     <div class="d-flex border-top">
                                         <small class="w-50 text-center border-end py-2">
@@ -125,8 +125,8 @@ $this->load->view('frontend/includes/header');
                                                 <a class="d-block h5 mb-2" href="<?php echo base_url('products/detail/' . $product['product_id']) ?>">
                                                     <?php echo $product['product_name']; ?>
                                                 </a>
-                                                <span class="text-primary me-1">₹<?php echo number_format($product['price']); ?></span>
-                                                <span class="text-body text-decoration-line-through">₹<?php echo number_format($product['mrp']); ?></span>
+                                                <span class="text-primary me-1">₹<?php echo number_format($product['price'], 2); ?></span>
+                                                <span class="text-body text-decoration-line-through">₹<?php echo number_format($product['mrp'], 2); ?></span>
                                             </div>
                                             <div class="d-flex border-top">
                                                 <small class="w-50 text-center border-end py-2">

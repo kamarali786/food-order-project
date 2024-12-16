@@ -77,7 +77,7 @@ $this->load->view('frontend/includes/header');
                                                 <small class="text-muted">x <?php echo $cartItems['selected_quantity'] ?></small>
                                             </div>
                                         </div>
-                                        <span>₹<?= number_format($cartItems['total_price']);
+                                        <span>₹<?= number_format($cartItems['total_price'], 2);
                                                 $grandTotal += $cartItems['total_price'] ?></span>
 
                                     </li>
@@ -88,7 +88,7 @@ $this->load->view('frontend/includes/header');
                     <hr>
                     <div class="d-flex justify-content-between">
                         <span class="checkout card-header" style="font-weight: 900; font-size: larger;">Total :</span>
-                        <p class="total-price">₹<?php echo number_format($grandTotal); ?></p>
+                    <p class="total-price">₹<?php echo number_format($grandTotal, 2); ?></p>
                         <?php $this->session->set_flashdata('total_amount', $grandTotal); ?>
                     </div>
                 </div>

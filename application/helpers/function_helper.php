@@ -22,6 +22,10 @@ if (!function_exists('modulesCount')) {
                 $query = $CI->db->query("SELECT COUNT(product_id) AS num_of_time FROM products WHERE is_delete = '0'");
                 $count = $query->row()->num_of_time;
                 break;
+            case 'orderCount':
+                $query = $CI->db->query("SELECT COUNT(order_id) AS num_of_time FROM orders");
+                $count = $query->row()->num_of_time;
+                break;
             default:
                 $count = 0;
                 break;
@@ -42,8 +46,8 @@ if (!function_exists('dd')) {
 if (!function_exists('generateTransactionIDWithTime')) {
     function generateTransactionIDWithTime($prefix = 'TXN')
     {
-        $timestamp = time(); // Current UNIX timestamp
-        $randomNumber = mt_rand(100000, 999999); // 6-digit random number
+        $timestamp = time();
+        $randomNumber = mt_rand(100000, 999999);
         return $prefix . $timestamp . $randomNumber;
     }
 }

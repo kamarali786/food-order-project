@@ -74,7 +74,7 @@
             <?php endforeach; ?>
         <?php else: ?>
             <div class="col-md-12">
-                <div class="alert alert-info text-center">
+                <div class="alert alert-info text-center">o
                     <strong>No orders found!</strong> You haven't placed any orders yet.
                 </div>
             </div>

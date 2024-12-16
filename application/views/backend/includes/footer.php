@@ -59,37 +59,56 @@
       <!-- /Right-bar -->
 
       <!-- Right bar overlay-->
+      <!-- Rightbar Overlay -->
       <div class="rightbar-overlay"></div>
 
-      <!-- JAVASCRIPT -->
-      <script src="<?php echo base_url("assets/backend/libs/jquery/jquery.min.js") ?>"></script>
-      <script src="<?php echo base_url("assets/backend/libs/bootstrap/js/bootstrap.bundle.min.js") ?>"></script>
-      <script src="<?php echo base_url("assets/backend/libs/metismenu/metisMenu.min.js") ?>"></script>
-      <script src="<?php echo base_url("assets/backend/libs/simplebar/simplebar.min.js") ?>"></script>
-      <script src="<?php echo base_url("assets/backend/libs/node-waves/waves.min.js") ?>"></script>
+      <!-- Vendor JavaScript Libraries -->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <!-- DataTables JS CDN -->
       <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+      <!-- DataTables Responsive JS CDN -->
       <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
 
-
-      <!-- apexcharts -->
-      <!-- <script src="<?php //echo base_url("assets/backend/libs/apexcharts/apexcharts.min.js") 
-                        ?>"></script> -->
-
-      <!-- dashboard init -->
-      <!-- <script src="<?php //echo base_url("assets/backend/js/pages/dashboard.init.js") 
-                        ?>"></script> -->
-      <script src="<?php echo base_url("assets/backend/js/pages/datatables.init.js") ?>"></script>
-
-      <!-- App js -->
-      <script src="<?php echo base_url("assets/backend/js/app.js") ?>"></script>
-
-      <!-- SweetAlert2 JS -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.8/dist/sweetalert2.min.js"></script>
 
-      <!-- Custom JS (ensure it doesn't conflict with SweetAlert2) -->
-      <script src="<?php echo base_url("assets/backend/js/custom.js") ?>"></script>
+      <!-- Backend JavaScript Libraries -->
+      <script src="<?php echo base_url('assets/backend/libs/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
+      <script src="<?php echo base_url('assets/backend/libs/metismenu/metisMenu.min.js'); ?>"></script>
+      <script src="<?php echo base_url('assets/backend/libs/simplebar/simplebar.min.js'); ?>"></script>
+      <script src="<?php echo base_url('assets/backend/libs/node-waves/waves.min.js'); ?>"></script>
 
+      <!-- App JS -->
+      <script src="<?php echo base_url('assets/backend/js/app.js'); ?>"></script>
 
-      </body>
+      <!-- Datatables Initialization -->
+      <script src="<?php echo base_url('assets/backend/js/pages/datatables.init.js'); ?>"></script>
 
-      </html>
+      <!-- Custom JS -->
+      <script>
+          // Set Base URL for custom scripts
+          var BASE_URL = "<?php echo base_url(); ?>";
+
+          // Toastr Notification Configuration
+          toastr.options = {
+              closeButton: true,
+              debug: false,
+              newestOnTop: true,
+              progressBar: true,
+              positionClass: "toast-top-right",
+              preventDuplicates: true,
+              onclick: null,
+              showDuration: "300",
+              hideDuration: "1000",
+              timeOut: "5000",
+              extendedTimeOut: "1000",
+              showEasing: "swing",
+              hideEasing: "linear",
+              showMethod: "fadeIn",
+              hideMethod: "fadeOut"
+          };
+      </script>
+
+      <!-- Additional Custom Scripts -->
+      <script src="<?php echo base_url('assets/backend/js/custom.js'); ?>"></script>

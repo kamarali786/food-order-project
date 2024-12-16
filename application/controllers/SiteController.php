@@ -500,9 +500,12 @@ class SiteController extends CI_Controller
 			$this->session->set_flashdata('error_message', 'Please log in or sign up to proceed to checkout and complete your order. Your cart is saved for you!');
 			redirect(base_url('login'));
 		} else {
-			if ($this->session->userdata('order_success')) { 
+			if ($this->session->userdata('order_success')) {
 				$order_id = $this->session->userdata('order_success');
-				$this->load->view('frontend/thankyou', ['order_id' => $order_id]);
+				$productsStockUpdate = $this->reduceProductStock($order_id);
+				if ($productsStockUpdate) {
+					$this->load->view('frontend/thankyou', ['order_id' => $order_id]);
+				}
 			} else {
 				$user_id = $user->user_id;
 				$ordersData = $this->OrderModel->getOrdersData($user_id);
@@ -531,6 +534,30 @@ class SiteController extends CI_Controller
 				}
 			} else {
 				redirect(base_url('order'));
+			}
+		}
+	}
+	private function reduceProductStock($order_id)
+	{
+
+		$user = $this->session->userdata('user');
+		if ($user) {
+			$user_id = $user->user_id;
+			$orderItems = $this->OrderModel->getOrderProductsData($user_id, $order_id);
+
+			foreach ($orderItems['order_items'] as $item) {
+				$product_id = $item['product_id'];
+				$ordered_quantity= $item['selected_quantity'];
+
+				$productUpdate = $this->OrderModel->decreaseStock($product_id, $ordered_quantity);
+			}
+			if($productUpdate)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
 			}
 		}
 	}

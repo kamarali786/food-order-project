@@ -23,9 +23,13 @@ class OrderModel extends CI_Model
     }
 
 
-    public function getOrdersData($user_id)
+    public function getOrdersData($user_id = null)
     {
-        $query = $this->db->where('user_id', $user_id)->get('orders');
+        if ($user_id) {
+            $this->db->where('user_id', $user_id);
+        }
+
+        $query = $this->db->get('orders');
 
         if ($query->num_rows() > 0) {
             return $query->result_array();
@@ -44,7 +48,7 @@ class OrderModel extends CI_Model
         }
     }
 
-    public function getOrderProductsData($user_id, $order_id)
+    public function getOrderProductsData($user_id = null, $order_id)
     {
         $this->db->select('
         orders.order_id,
@@ -65,15 +69,20 @@ class OrderModel extends CI_Model
         products.price AS product_price,
         products.product_image
     ');
+
         $this->db->from('orders');
         $this->db->join('order_products', 'orders.order_id = order_products.order_id', 'inner');
         $this->db->join('products', 'order_products.product_id = products.product_id', 'inner');
-        $this->db->where('orders.user_id', $user_id);
+
+        if ($user_id !== null) {
+            $this->db->where('orders.user_id', $user_id);
+        }
+
         $this->db->where('orders.order_id', $order_id);
+
         $query = $this->db->get();
 
         if ($query->num_rows() > 0) {
-
             $orderData = [];
             $orderItems = [];
 
@@ -88,24 +97,88 @@ class OrderModel extends CI_Model
                         'payment_method'  => $row['payment_method'],
                         'payment_status'  => $row['payment_status'],
                         'delivery_date'   => $row['delivery_date'],
-                        'shipping_address'=> $row['shipping_address'],
+                        'shipping_address' => $row['shipping_address'],
                         'billing_data'    => $row['billing_data'],
                         'transaction_id'  => $row['transaction_id']
                     ];
                 }
+
                 $orderItems[] = [
                     'product_id'       => $row['product_id'],
                     'product_name'     => $row['product_name'],
                     'product_image'    => $row['product_image'],
                     'selected_quantity' => $row['selected_quantity'],
                     'product_price'    => $row['product_price'],
-                    'total_price' => $row['total_price'],
+                    'total_price'      => $row['total_price'],
                 ];
             }
-            
+
             $orderData['order_items'] = $orderItems;
 
             return $orderData;
         }
+    }
+
+    public function decreaseStock($product_id, $ordered_quantity)
+    {
+        $this->db->select('stock');
+        $this->db->from('products');
+        $this->db->where('product_id', $product_id);
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            $product = $query->row_array();
+            $current_stock = $product['stock'];
+
+            $new_stock = $current_stock - $ordered_quantity;
+
+            if ($new_stock < 0) {
+                $new_stock = 0;
+            }
+
+            $productUpadte = $this->db->set('stock', $new_stock);
+            $this->db->where('product_id', $product_id);
+            $this->db->update('products');
+            if ($productUpadte) {
+                return true;
+            } else {
+                return false;
+            }
+
+            log_message('info', "Stock updated for product_id: {$product_id}. New stock: {$new_stock}");
+        } else {
+            log_message('error', "Product not found for product_id: {$product_id}");
+        }
+    }
+    public function getAllOrders()
+    {
+        $this->db->order_by('order_id', 'DESC');
+        $query = $this->db->get('orders');
+
+        if ($query->num_rows() > 0) {
+            //return false;
+            return $query->result_array();
+        } else {
+            return false;
+        }
+    }
+    public function changeOrderStatus($order_id, $orderStatus)
+    {
+
+        if (!empty($order_id) && !empty($orderStatus)) {
+            
+            $data = ['order_status' => $orderStatus];
+        
+            if ($orderStatus === 'Completed') {
+                $data['payment_status'] = 'Paid';
+            }
+    
+            $this->db->set($data);
+            $this->db->where('order_id', $order_id);
+            $update = $this->db->update('orders');
+    
+            return $update;
+        }
+        
     }
 }

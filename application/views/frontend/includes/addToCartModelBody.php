@@ -7,7 +7,7 @@
         <hr class="text-muted">
         <p class="text-muted"><?php echo $product->description; ?></p>
         <hr class="text-muted">
-        <p><strong>Price:</strong> <span class="text-success">₹<?php echo number_format($product->price); ?></span></p>
+        <p><strong>Price:</strong> <span class="text-success">₹<?php echo number_format($product->price, 2); ?></span></p>
         <hr class="text-muted">
         <p><strong>Available Stock:</strong>
             <?php if ($product->stock > 0) { ?>

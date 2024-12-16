@@ -113,5 +113,8 @@ $route['product/edit-product/(:any)'] = 'ProductController/edit_product/$1';
 $route['setting'] = 'SettingController';
 $route['setting/add-setting'] = 'SettingController/add_Setting';
 
+$route['orders'] = 'OrdersController/getOrdersData';
+$route['orders/view/(:any)'] = 'OrdersController/getOrdersDataItems/$1';
+
 $route['404_override'] = 'Custom404';
 $route['translate_uri_dashes'] = FALSE;

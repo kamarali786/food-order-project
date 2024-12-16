@@ -42,3 +42,29 @@ $(document).ready(function () {
 	});
 });
 
+// change order status
+$(document).ready(function () {
+	$(".order-status").on("change", function () {
+		const orderStatus = $(this).val();
+		const orderId = $(this).data("order-id");
+		$.ajax({
+			url: BASE_URL + "OrdersController/changeOrderStatus",
+			type: "POST",
+			data: {
+				order_id: orderId,
+				orderStatus: orderStatus,
+			},
+			dataType: "json",
+			success: function (response) {
+				if (response.success == 1) {
+					toastr.success(response.message);
+				} else {
+					toastr.error("Something went wrong!");
+				}
+			},
+			error: function (xhr, status, error) {
+				console.error("Failed to update order status:", error);
+			},
+		});
+	});
+});

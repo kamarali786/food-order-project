@@ -131,16 +131,16 @@
                                         <span><?php echo $order_items['product_name'] ?></span>
                                     </div>
                                 </td>
-                                <td>₹<?php echo number_format($order_items['selected_quantity']) ?></td>
-                                <td>₹<?php echo number_format($order_items['product_price']) ?></td>
-                                <td>₹<?php echo number_format($order_items['total_price']) ?></td>
+                                <td><?php echo $order_items['selected_quantity'] ?></td>
+                                <td>₹<?php echo number_format($order_items['product_price'], 2) ?></td>
+                                <td>₹<?php echo number_format($order_items['total_price'], 2) ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                     <tfoot>
                         <tr>
                             <th colspan="3" class="text-end">Grand Total:</th>
-                            <th>₹<?php echo number_format($orderDetailsData['total_amount']) ?></th>
+                            <th>₹<?php echo number_format($orderDetailsData['total_amount'], 2) ?></th>
                         </tr>
                     </tfoot>
                 </table>
@@ -218,7 +218,7 @@
                         </div>
                         <div class="details-row">
                             <p><strong>Total Amount:</strong></p>
-                            <p>₹<?= number_format($orderDetailsData['total_amount']) ?></p>
+                            <p>₹<?= number_format($orderDetailsData['total_amount'], 2) ?></p>
                         </div>
                     </div>
 

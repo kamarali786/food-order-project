@@ -40,6 +40,12 @@
                         <span key="t-dashboards">Product</span>
                     </a>
                 </li>
+                <li class="<?php echo !empty(str_contains($_SERVER['PHP_SELF'], "orders")) ? 'mm-active' : ""; ?>">
+                    <a href="<?php echo base_url('orders') ?>" class="waves-effect">
+                        <i class="fas fa-shopping-cart"></i><span class="badge rounded-pill bg-info float-end"><?php echo modulesCount('orderCount'); ?></span>
+                        <span key="t-dashboards">Orders</span>
+                    </a>
+                </li>
                 <li class="<?php echo !empty(str_contains($_SERVER['PHP_SELF'], "setting")) ? 'mm-active' : ""; ?>">
                     <a href="<?php echo base_url('setting') ?>" class="waves-effect">
                         <i class="fa fa-cog"></i></span>

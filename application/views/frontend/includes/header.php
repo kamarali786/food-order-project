@@ -67,6 +67,7 @@ if ($user_data) {
                         <?php else: ?>
                             <a href="<?php echo base_url('user-profile'); ?>">Profile</a>
                             <a href="<?= base_url('user-logout') ?>">Logout</a>
+                            <a href="<?= base_url('order') ?>">My Orders</a>
                         <?php endif; ?>
                     </div>
                 </div>

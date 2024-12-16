@@ -45,8 +45,8 @@ $this->load->view('frontend/includes/header');
 
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div>
-                        <span class="product-price display-6 text-success">₹<?php echo number_format($product->price); ?></span>
-                        <span class="old-price ms-2 text-decoration-line-through text-muted">₹<?php echo number_format($product->mrp); ?></span>
+                        <span class="product-price display-6 text-success">₹<?php echo number_format($product->price, 2); ?></span>
+                        <span class="old-price ms-2 text-decoration-line-through text-muted">₹<?php echo number_format($product->mrp, 2); ?></span>
                     </div>
                     <span class="badge bg-success text-white"><?php echo ($product->stock > 0) ? "In Stock" : "Out of Stock"; ?></span>
                 </div>
@@ -82,8 +82,8 @@ $this->load->view('frontend/includes/header');
                                     </div>
                                     <div class="text-center p-4">
                                         <a class="d-block h5 mb-2" href="<?php echo base_url('products/detail/' . $product->product_id) ?>"><?php echo $related_product->product_name ?></a>
-                                        <span class="text-primary me-1">₹<?php echo number_format($related_product->price) ?></span>
-                                        <span class="text-body text-decoration-line-through">₹<?php echo number_format($related_product->mrp) ?></span>
+                                        <span class="text-primary me-1">₹<?php echo number_format($related_product->price, 2) ?></span>
+                                        <span class="text-body text-decoration-line-through">₹<?php echo number_format($related_product->mrp, 2) ?></span>
                                     </div>
                                     <div class="d-flex border-top">
                                         <small class="w-50 text-center border-end py-2">
