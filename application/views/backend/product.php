@@ -22,7 +22,9 @@ $this->load->view('backend/includes/header.php');
                             <?php endif; ?>
                             <div class="d-flex justify-content-between mb-3 mt-3">
                                 <h3>Product List</h3>
-                                <a class="btn btn-outline-primary mb-3" href=<?php echo base_url('product/add-product') ?>><i class="fa fa-plus me-1"></i> Add
+                                <a class="btn btn-outline-primary mb-3"
+                                    href=<?php echo base_url('product/add-product') ?>><i class="fa fa-plus me-1"></i>
+                                    Add
                                     Product</a>
                             </div>
 
@@ -52,18 +54,23 @@ $this->load->view('backend/includes/header.php');
                                                     <td><?php echo $product->product_id; ?></td>
                                                     <td><?php echo $product->category_name; ?></td>
                                                     <td><?php echo $product->subCategory_name; ?></td>
-                                                    
+
                                                     <td><?php echo $product->product_name; ?></td>
-                                                    <td><img src="<?php echo base_url($product->product_image); ?>" alt="Product Image" width="100"></td>
-                                                    <td><?php echo $product->description?></td>
+                                                    <td><img src="<?php echo base_url($product->product_image); ?>"
+                                                            alt="Product Image" width="100"></td>
+                                                    <td><?php echo $product->description ?></td>
                                                     <td><?php echo $product->stock ?></td>
-                                                    <td><?php echo $product->quantity?></td>
-                                                    <td>₹<?php echo number_format($product->price, 2)?></td>
-                                                    <td>₹<?php echo number_format($product->mrp, 2)?></td>
-                                                    <td class="fw-bold text-primary"><?php echo ($product->status == 1) ? 'Active' : 'Inactive'; ?></td>
+                                                    <td><?php echo $product->quantity ?></td>
+                                                    <td>₹<?php echo number_format($product->price, 2) ?></td>
+                                                    <td>₹<?php echo number_format($product->mrp, 2) ?></td>
+                                                    <td class="fw-bold text-primary">
+                                                        <?php echo ($product->status == 1) ? 'Active' : 'Inactive'; ?></td>
                                                     <td>
-                                                        <a class="btn btn-warning" href="<?php echo base_url('product/get-product/' . $product->product_id); ?>">Edit</a>
-                                                        <a id="delete-btn" class="btn btn-danger" href="<?php echo base_url('product/delete-product/' . $product->product_id); ?>" onclick="return deleted(this);">Delete</a>
+                                                        <a class="btn btn-warning"
+                                                            href="<?php echo base_url('product/get-product/' . $product->product_id); ?>">Edit</a>
+                                                        <a id="delete-btn" class="btn btn-danger"
+                                                            href="<?php echo base_url('product/delete-product/' . $product->product_id); ?>"
+                                                            onclick="return deleted(this);">Delete</a>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
@@ -95,4 +102,3 @@ $this->load->view('backend/includes/header.php');
 $this->load->view('backend/includes/footer.php');
 
 ?>
-
