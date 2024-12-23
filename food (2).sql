@@ -274,7 +274,7 @@ INSERT INTO `settings` (`id`, `key`, `value`, `created_at`, `updated_at`) VALUES
 (159, 'fav_icon', 'uploads/setting/favicon/20241202114056_favicon.png', '2024-11-25 10:03:26', '2024-12-02 06:10:56'),
 (158, 'logo', 'uploads/setting/logo/20241202113500_logo.png', '2024-11-25 09:57:29', '2024-12-02 06:05:00'),
 (154, 'fb_url', 'https://www.facebook.com', '2024-11-24 21:29:20', '2024-12-03 09:00:16'),
-(153, 'address', 'oops Bus stand , near college', '2024-11-24 21:29:20', '2024-12-03 09:00:16'),
+(153, 'address', 'B/h old shia Masjid , Palanpur', '2024-11-24 21:29:20', '2024-12-03 09:00:16'),
 (152, 'about', '\"Welcome to our Food website, your go-to destination for delicious recipes, food tips, and culinary inspiration. Whether you\'re looking for quick meal ideas, gourmet recipes, or healthy eating options, we’ve got something to satisfy every craving. Explore our diverse range of cuisines, discover new flavors, and take your cooking skills to the next level with easy-to-follow guides and expert advice.\"', '2024-11-24 21:29:20', '2024-12-03 09:00:16'),
 (151, 'phone_number', '9558696170', '2024-11-24 21:29:20', '2024-12-03 09:00:16'),
 (150, 'email', 'maknojiyaali123@gmail.com', '2024-11-24 21:29:20', '2024-12-03 09:00:16'),
